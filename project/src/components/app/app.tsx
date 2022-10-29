@@ -9,5 +9,4 @@ type AppProps = {
 function App({title, genre, releaseData} : AppProps): JSX.Element {
   return <MainPage title={title} genre = {genre} releaseData = {releaseData}></MainPage>;
 }
-
 export default App;
