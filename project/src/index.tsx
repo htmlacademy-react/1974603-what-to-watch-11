@@ -7,7 +7,8 @@ const FilmData = {
   TITLE: 'The Grand Budapest Hotel',
   GENRE: 'Drama',
   RELEASE_DATE: 2014
-}
+};
+
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
 );
