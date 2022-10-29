@@ -17,7 +17,6 @@ function FilmPage(): JSX.Element {
               <span className="logo__letter logo__letter--3">W</span>
             </a>
           </div>
-
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
@@ -29,7 +28,6 @@ function FilmPage(): JSX.Element {
             </li>
           </ul>
         </header>
-
         <div className="film-card__wrap">
           <div className="film-card__desc">
             <h2 className="film-card__title">The Grand Budapest Hotel</h2>
