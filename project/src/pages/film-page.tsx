@@ -6,9 +6,7 @@ function FilmPage(): JSX.Element {
         <div className="film-card__bg">
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
         </div>
-
         <h1 className="visually-hidden">WTW</h1>
-
         <header className="page-header film-card__head">
           <div className="logo">
             <a href="main.html" className="logo__link">
