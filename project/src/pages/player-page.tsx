@@ -2,7 +2,7 @@ const PlayerStyle = {
   left: '30%'
 };
 
-function Player () : JSX.Element {
+function PlayerPage () : JSX.Element {
   return (
     <div className="player">
       <video src="#" className="player__video" poster="img/player-poster.jpg"></video>
@@ -23,7 +23,6 @@ function Player () : JSX.Element {
             <span>Play</span>
           </button>
           <div className="player__name">Transpotting</div>
-
           <button type="button" className="player__full-screen">
             <svg viewBox="0 0 27 27" width="27" height="27">
               <use xlinkHref="#full-screen"></use>
@@ -35,4 +34,4 @@ function Player () : JSX.Element {
     </div>
   );
 }
-export default Player;
+export default PlayerPage;

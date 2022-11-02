@@ -1,14 +1,14 @@
-
 import React from 'react';
-import FilmCard from '../components/film-card';
+import FilmCardComponent from '../components/film-card-component';
+import {Link} from 'react-router-dom';
 
-type DataFilmProps = {
+type Props = {
   title: string;
   genre: string;
   releaseData: number;
 }
 
-function MainPage({title, genre, releaseData} : DataFilmProps): JSX.Element {
+function MainPage({title, genre, releaseData} : Props): JSX.Element {
   return (
     <React.Fragment>
       <section className="film-card">
@@ -18,11 +18,11 @@ function MainPage({title, genre, releaseData} : DataFilmProps): JSX.Element {
         <h1 className="visually-hidden">WTW</h1>
         <header className="page-header film-card__head">
           <div className="logo">
-            <a className="logo__link">
+            <Link to = "/" className="logo__link">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
           <ul className="user-block">
             <li className="user-block__item">
@@ -31,7 +31,7 @@ function MainPage({title, genre, releaseData} : DataFilmProps): JSX.Element {
               </div>
             </li>
             <li className="user-block__item">
-              <a className="user-block__link">Sign out</a>
+              <Link to ="/" className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
@@ -70,57 +70,57 @@ function MainPage({title, genre, releaseData} : DataFilmProps): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <ul className="catalog__genres-list">
             <li className="catalog__genres-item catalog__genres-item--active">
-              <a href="#" className="catalog__genres-link">All genres</a>
+              <Link to ="/" className="catalog__genres-link">All genres</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Comedies</a>
+              <Link to ="/" className="catalog__genres-link">Comedies</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Crime</a>
+              <Link to ="/" className="catalog__genres-link">Crime</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Documentary</a>
+              <Link to ="/" className="catalog__genres-link">Documentary</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Dramas</a>
+              <Link to ="/" className="catalog__genres-link">Dramas</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Horror</a>
+              <Link to ="/" className="catalog__genres-link">Horror</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Kids & Family</a>
+              <Link to ="/" className="catalog__genres-link">Kids & Family</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Romance</a>
+              <Link to ="/" className="catalog__genres-link">Romance</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Sci-Fi</a>
+              <Link to ="/" className="catalog__genres-link">Sci-Fi</Link>
             </li>
             <li className="catalog__genres-item">
-              <a href="#" className="catalog__genres-link">Thrillers</a>
+              <Link to ="/" className="catalog__genres-link">Thrillers</Link>
             </li>
           </ul>
           <div className="catalog__films-list">
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
-            <FilmCard/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
+            <FilmCardComponent/>
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
@@ -128,11 +128,11 @@ function MainPage({title, genre, releaseData} : DataFilmProps): JSX.Element {
         </section>
         <footer className="page-footer">
           <div className="logo">
-            <a className="logo__link logo__link--light">
+            <Link to ="/" className="logo__link logo__link--light">
               <span className="logo__letter logo__letter--1">W</span>
               <span className="logo__letter logo__letter--2">T</span>
               <span className="logo__letter logo__letter--3">W</span>
-            </a>
+            </Link>
           </div>
           <div className="copyright">
             <p>© 2019 What to watch Ltd.</p>

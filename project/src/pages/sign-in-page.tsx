@@ -1,4 +1,4 @@
-function SignIn(): JSX.Element {
+function SignInPage(): JSX.Element {
   return (
     <div className="sign-in user-page__content">
       <form action="#" className="sign-in__form">
@@ -20,4 +20,4 @@ function SignIn(): JSX.Element {
   );
 }
 
-export default SignIn;
+export default SignInPage;
