@@ -8,20 +8,22 @@ import FilmPage from '../../pages/film-page';
 import AddReviewPage from '../../pages/add-review-page';
 import PlayerPage from '../../pages/player-page';
 import PrivateRoute from '../../components/private-route';
+import {FilmType} from '../../types/film-type';
 
 type Props = {
   title: string;
   genre: string;
   releaseData: number;
+  films: FilmType[];
 }
 
-function App({title, genre, releaseData} : Props): JSX.Element {
+function App({title, genre, releaseData, films} : Props): JSX.Element {
   return (
     <BrowserRouter>
       <Routes>
         <Route
           path = {AppRoute.Main}
-          element = {<MainPage title={title} genre = {genre} releaseData = {releaseData} />}
+          element = {<MainPage title={title} genre = {genre} releaseData = {releaseData} films = {films} />}
         />
         <Route
           path = {AppRoute.SignIn}

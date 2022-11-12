@@ -1,14 +1,16 @@
 import React from 'react';
-import FilmCardComponent from '../components/film-card-component';
 import {Link} from 'react-router-dom';
+import { FilmType } from '../types/film-type';
+import FilmsListComponent from '../components/film-list-component';
 
 type Props = {
   title: string;
   genre: string;
   releaseData: number;
+  films: FilmType[];
 }
 
-function MainPage({title, genre, releaseData} : Props): JSX.Element {
+function MainPage({title, genre, releaseData, films} : Props): JSX.Element {
   return (
     <React.Fragment>
       <section className="film-card">
@@ -101,26 +103,7 @@ function MainPage({title, genre, releaseData} : Props): JSX.Element {
             </li>
           </ul>
           <div className="catalog__films-list">
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
-            <FilmCardComponent/>
+            <FilmsListComponent films = {films}/>
           </div>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
