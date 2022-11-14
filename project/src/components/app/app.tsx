@@ -10,7 +10,7 @@ import PlayerPage from '../../pages/player-page';
 import PrivateRoute from '../../components/private-route';
 import {FilmType} from '../../types/film-type';
 
-type Props = {
+type Props={
   title: string;
   genre: string;
   releaseData: number;
@@ -22,38 +22,38 @@ function App({title, genre, releaseData, films} : Props): JSX.Element {
     <BrowserRouter>
       <Routes>
         <Route
-          path = {AppRoute.Main}
-          element = {<MainPage title={title} genre = {genre} releaseData = {releaseData} films = {films} />}
+          path={AppRoute.Main}
+          element={<MainPage title={title} genre={genre} releaseData={releaseData} films={films} />}
         />
         <Route
-          path = {AppRoute.SignIn}
-          element = {<SignInPage />}
+          path={AppRoute.SignIn}
+          element={<SignInPage />}
         />
         <Route
-          path = {AppRoute.MyList}
-          element = {
+          path={AppRoute.MyList}
+          element={
             <PrivateRoute
-              authorizationStatus = {AuthorizationStatus.NoAuth}
+              authorizationStatus={AuthorizationStatus.NoAuth}
             >
-              <MyListPage />
+              <MyListPage films={films} />
             </PrivateRoute>
           }
         />
         <Route
-          path = {AppRoute.Film}
-          element = {<FilmPage />}
+          path={AppRoute.Film}
+          element={<FilmPage />}
         />
         <Route
-          path = {AppRoute.AddReview}
-          element = {<AddReviewPage />}
+          path={AppRoute.AddReview}
+          element={<AddReviewPage film = {films[0]}/>}
         />
         <Route
-          path = {AppRoute.Player}
-          element = {<PlayerPage />}
+          path={AppRoute.Player}
+          element={<PlayerPage film={films[0]}/>}
         />
         <Route
-          path = "*"
-          element = {<NotFoundPage />}
+          path="*"
+          element={<NotFoundPage />}
         />
       </Routes>
     </BrowserRouter>

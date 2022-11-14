@@ -29,11 +29,13 @@ function MainPage({title, genre, releaseData, films} : Props): JSX.Element {
           <ul className="user-block">
             <li className="user-block__item">
               <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                <Link to="/mylist">
+                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                </Link>
               </div>
             </li>
             <li className="user-block__item">
-              <Link to ="/" className="user-block__link">Sign out</Link>
+              <Link to ="/login" className="user-block__link">Sign out</Link>
             </li>
           </ul>
         </header>
@@ -102,9 +104,7 @@ function MainPage({title, genre, releaseData, films} : Props): JSX.Element {
               <Link to ="/" className="catalog__genres-link">Thrillers</Link>
             </li>
           </ul>
-          <div className="catalog__films-list">
-            <FilmsListComponent films = {films}/>
-          </div>
+          <FilmsListComponent films = {films}/>
           <div className="catalog__more">
             <button className="catalog__button" type="button">Show more</button>
           </div>
