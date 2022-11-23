@@ -1,13 +1,13 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import { FilmType } from '../types/film-type';
+import {Film} from '../types/film-type';
 import FilmsListComponent from '../components/film-list-component';
 
 type Props = {
   title: string;
   genre: string;
   releaseData: number;
-  films: FilmType[];
+  films: Film[];
 }
 
 function MainPage({title, genre, releaseData, films} : Props): JSX.Element {

@@ -1,9 +1,9 @@
-import {FilmType} from '../types/film-type';
+import {Film} from '../types/film-type';
 import {Link} from 'react-router-dom';
-import CommentComponent from '../components/comment-component';
+import AddComment from '../components/comment-component';
 
 type Props = {
-  film: FilmType;
+  film: Film;
 }
 
 function AddReviewPage({film} : Props) : JSX.Element {
@@ -48,7 +48,7 @@ function AddReviewPage({film} : Props) : JSX.Element {
         </div>
       </div>
       <div className="add-review">
-        <CommentComponent></CommentComponent>
+        <AddComment />
       </div>
     </section>
   );
