@@ -1,6 +1,6 @@
 import {Link} from 'react-router-dom';
 
-function NotFoundPage (): JSX.Element {
+function NotFound (): JSX.Element {
   return (
     <section className="film-card">
       <header className="page-header film-card__head">
@@ -29,4 +29,4 @@ function NotFoundPage (): JSX.Element {
     </section>
   );
 }
-export default NotFoundPage;
+export default NotFound;

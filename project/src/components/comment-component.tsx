@@ -1,6 +1,6 @@
 import React, {ChangeEvent, useState} from 'react';
 
-function CommentComponent () : JSX.Element {
+function AddComment () : JSX.Element {
   const [commentState, setCommentState] = useState('');
   const onChangeHandler = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
     setCommentState(target.value);
@@ -44,4 +44,4 @@ function CommentComponent () : JSX.Element {
     </form>
   );
 }
-export default CommentComponent;
+export default AddComment;

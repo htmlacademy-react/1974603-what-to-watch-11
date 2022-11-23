@@ -8,13 +8,13 @@ import FilmPage from '../../pages/film-page';
 import AddReviewPage from '../../pages/add-review-page';
 import PlayerPage from '../../pages/player-page';
 import PrivateRoute from '../../components/private-route';
-import {FilmType} from '../../types/film-type';
+import {Film} from '../../types/film-type';
 
 type Props={
   title: string;
   genre: string;
   releaseData: number;
-  films: FilmType[];
+  films: Film[];
 }
 
 function App({title, genre, releaseData, films} : Props): JSX.Element {
@@ -41,15 +41,15 @@ function App({title, genre, releaseData, films} : Props): JSX.Element {
         />
         <Route
           path={AppRoute.Film}
-          element={<FilmPage />}
+          element={<FilmPage film ={films[0]}/>}
         />
         <Route
           path={AppRoute.AddReview}
-          element={<AddReviewPage film = {films[0]}/>}
+          element={<AddReviewPage film ={films[0]} />}
         />
         <Route
           path={AppRoute.Player}
-          element={<PlayerPage film={films[0]}/>}
+          element={<PlayerPage film={films[0]} />}
         />
         <Route
           path="*"

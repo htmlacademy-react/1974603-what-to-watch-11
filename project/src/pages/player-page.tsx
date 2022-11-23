@@ -1,10 +1,10 @@
-import {FilmType} from '../types/film-type';
+import {Film} from '../types/film-type';
 const PlayerStyle = {
   left: '30%'
 };
 
 type Props = {
-  film: FilmType;
+  film: Film;
 }
 
 function PlayerPage ({film} : Props) : JSX.Element {

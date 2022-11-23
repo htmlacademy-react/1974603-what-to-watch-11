@@ -1,8 +1,8 @@
-import {FilmType} from '../types/film-type';
+import {Film} from '../types/film-type';
 import FilmsListComponent from '../components/film-list-component';
 
 type Props = {
-  films: FilmType[];
+  films: Film[];
 }
 
 function MyListPage({films} : Props): JSX.Element {
