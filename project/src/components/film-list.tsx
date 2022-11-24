@@ -1,4 +1,4 @@
-import FilmCardComponent from './film-card-component';
+import FilmCardComponent from './film-card';
 import {Film} from '../types/film-type';
 
 
