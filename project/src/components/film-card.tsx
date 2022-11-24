@@ -1,7 +1,7 @@
 import {useState, useRef, useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import {Film} from '../types/film-type';
-import VideoPlayer from './video-player-component';
+import VideoPlayer from './video-player';
 
 type Props = {
 film: Film;
@@ -9,7 +9,6 @@ film: Film;
 const TYME_DELAY = 1000;
 
 function FilmCard ({film}: Props): JSX.Element {
-  const [, setActiveId] = useState<number | undefined>(undefined);
   const [playing, setPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -32,29 +31,18 @@ function FilmCard ({film}: Props): JSX.Element {
     videoRef.current.load();
 
   }, [playing]);
+
   const handleMouseEnter = () => {
-    if (setActiveId) {
-      setActiveId(film.id);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (setActiveId) {
-      setActiveId(undefined);
-    }
-  };
-
-  const handleMouseOver = () => {
     setPlaying(true);
   };
 
-  const handleMouseOut = () => {
+  const handleMouseLeave = () => {
     setPlaying(false);
   };
 
   const {name, posterImage, previewVideoLink} = film;
   return (
-    <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave} onMouseOver={handleMouseOver} onMouseOut={handleMouseOut}>
+    <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
       <Link to="/films/:id" className="small-film-card__link">
         <div className="small-film-card__image">
           <VideoPlayer src={previewVideoLink} poster={posterImage} ref={videoRef} />

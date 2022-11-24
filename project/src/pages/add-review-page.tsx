@@ -1,6 +1,6 @@
 import {Film} from '../types/film-type';
 import {Link} from 'react-router-dom';
-import AddComment from '../components/comment-component';
+import AddComment from '../components/comment';
 
 type Props = {
   film: Film;

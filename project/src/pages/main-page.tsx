@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
 import {Film} from '../types/film-type';
-import FilmsListComponent from '../components/film-list-component';
+import FilmsListComponent from '../components/film-list';
 
 type Props = {
   title: string;

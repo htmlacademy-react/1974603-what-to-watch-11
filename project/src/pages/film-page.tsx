@@ -1,17 +1,15 @@
 import {Link} from 'react-router-dom';
+import FilmsList from '../components/film-list';
+import FilmTabs from '../components/tabs';
 import {Film} from '../types/film-type';
-//import {Tabs} from '../components/tabs-component';
 
 type Props = {
 film: Film;
+films: Film[];
 }
 
-const FilmCardText = {
-  TEXT_ONE:'In the 1930s, the Grand Budapest Hotel is a popular European ski resort, presided over by concierge Gustave H. (Ralph Fiennes). Zero, a junior lobby boy, becomes Gustave\'s friend and protege.',
-  TEXT_TWO: 'Gustave prides himself on providing first-class service to the hotel\'s guests, including satisfying the sexual needs of the many elderly women who stay there. When one of Gustave\'s lovers dies mysteriously, Gustave finds himself the recipient of a priceless painting and the chief suspect in her murder.'
-};
-
-function FilmPage({film} : Props): JSX.Element {
+function FilmPage({film, films} : Props): JSX.Element {
+  const similarFilms = films.filter((item) => item.genre === film.genre).slice(0,4);
   return (
     <section className="film-card film-card--full">
       <div className="film-card__hero">
@@ -69,36 +67,10 @@ function FilmPage({film} : Props): JSX.Element {
           <div className="film-card__poster film-card__poster--big">
             <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
           </div>
-          <div className="film-card__desc">
-            <nav className="film-nav film-card__nav">
-              <ul className="film-nav__list">
-                <li className="film-nav__item film-nav__item--active">
-                  <Link to ="/" className="film-nav__link">Overview</Link>
-                </li>
-                <li className="film-nav__item">
-                  <Link to ="/" className="film-nav__link">Details</Link>
-                </li>
-                <li className="film-nav__item">
-                  <Link to ="/" className="film-nav__link">Reviews</Link>
-                </li>
-              </ul>
-            </nav>
-            <div className="film-rating">
-              <div className="film-rating__score">8,9</div>
-              <p className="film-rating__meta">
-                <span className="film-rating__level">Very good</span>
-                <span className="film-rating__count">240 ratings</span>
-              </p>
-            </div>
-            <div className="film-card__text">
-              <p>{FilmCardText.TEXT_ONE}</p>
-              <p>{FilmCardText.TEXT_TWO}</p>
-              <p className="film-card__director"><strong>Director: Wes Anderson</strong></p>
-              <p className="film-card__starring"><strong>Starring: Bill Murray, Edward Norton, Jude Law, Willem Dafoe and other</strong></p>
-            </div>
-          </div>
+          <FilmTabs film={film} />
         </div>
       </div>
+      <FilmsList films={similarFilms} />
     </section>
   );
 }
