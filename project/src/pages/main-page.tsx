@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {Link} from 'react-router-dom';
 import {Film} from '../types/film-type';
 import FilmsListComponent from '../components/film-list';
+import GenreList from '../components/genres-list';
+import { ONE_PART_OF_THE_FILMS } from '../const';
+import ShowMoreButton from '../components/show-more-button';
 
 type Props = {
   title: string;
@@ -11,6 +14,10 @@ type Props = {
 }
 
 function MainPage({title, genre, releaseData, films} : Props): JSX.Element {
+  const [filmCount, setFilmCount] = useState(ONE_PART_OF_THE_FILMS);
+  const handleShowMoreButton = () => {
+    setFilmCount(filmCount + ONE_PART_OF_THE_FILMS);
+  };
   return (
     <React.Fragment>
       <section className="film-card">
@@ -72,42 +79,9 @@ function MainPage({title, genre, releaseData, films} : Props): JSX.Element {
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
-          <ul className="catalog__genres-list">
-            <li className="catalog__genres-item catalog__genres-item--active">
-              <Link to ="/" className="catalog__genres-link">All genres</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Comedies</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Crime</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Documentary</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Dramas</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Horror</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Kids & Family</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Romance</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Sci-Fi</Link>
-            </li>
-            <li className="catalog__genres-item">
-              <Link to ="/" className="catalog__genres-link">Thrillers</Link>
-            </li>
-          </ul>
+          <GenreList />
           <FilmsListComponent films = {films}/>
-          <div className="catalog__more">
-            <button className="catalog__button" type="button">Show more</button>
-          </div>
+          {films.length > ONE_PART_OF_THE_FILMS ? <ShowMoreButton onButtonClick={handleShowMoreButton}/> : ''}
         </section>
         <footer className="page-footer">
           <div className="logo">

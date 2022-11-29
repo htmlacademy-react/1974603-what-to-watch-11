@@ -12,3 +12,5 @@ export enum AuthorizationStatus {
   NoAuth = 'NO_AUTH',
   Unknown = 'UNKNOWN',
 }
+
+export const ONE_PART_OF_THE_FILMS = 8;
