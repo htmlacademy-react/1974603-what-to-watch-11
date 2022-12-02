@@ -1,23 +1,32 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
-import {Film} from '../types/film-type';
 import FilmsListComponent from '../components/film-list';
 import GenreList from '../components/genres-list';
 import { ONE_PART_OF_THE_FILMS } from '../const';
 import ShowMoreButton from '../components/show-more-button';
+import { useAppDispatch, useAppSelector } from '../hooks';
+import { selectFilm } from '../store/selector';
+import { setFilmsAction } from '../store/action';
 
 type Props = {
   title: string;
   genre: string;
   releaseData: number;
-  films: Film[];
 }
 
-function MainPage({title, genre, releaseData, films} : Props): JSX.Element {
+function MainPage({title, genre, releaseData} : Props): JSX.Element {
   const [filmCount, setFilmCount] = useState(ONE_PART_OF_THE_FILMS);
+  const storeFilms = useAppSelector(selectFilm);
+  const dispatch = useAppDispatch();
+  const films = storeFilms.slice(0,filmCount);
   const handleShowMoreButton = () => {
     setFilmCount(filmCount + ONE_PART_OF_THE_FILMS);
   };
+
+  useEffect(() => {
+    dispatch(setFilmsAction(films));
+  });
+
   return (
     <React.Fragment>
       <section className="film-card">
@@ -80,8 +89,8 @@ function MainPage({title, genre, releaseData, films} : Props): JSX.Element {
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList />
-          <FilmsListComponent films = {films}/>
-          {films.length > ONE_PART_OF_THE_FILMS ? <ShowMoreButton onButtonClick={handleShowMoreButton}/> : ''}
+          <FilmsListComponent films = {films} />
+          {storeFilms.length > ONE_PART_OF_THE_FILMS ? <ShowMoreButton onButtonClick={handleShowMoreButton} /> : ''}
         </section>
         <footer className="page-footer">
           <div className="logo">
