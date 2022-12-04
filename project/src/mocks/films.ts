@@ -1,6 +1,6 @@
-import {Film} from '../types/film-type';
+import {Films} from '../types/film-type';
 
-export const films: Film[] = [
+export const films: Films = [
   {
     id: 1,
     name: 'Игра на понижение',
@@ -16,7 +16,7 @@ export const films: Film[] = [
     director: 'Idk',
     starring: ['Rick Astley','Rick Astley'],
     runTime: 55,
-    genre: 'Rickroll',
+    genre: 'Romance',
     released: 2001,
     isFavorite: false,
   }, {
@@ -34,7 +34,7 @@ export const films: Film[] = [
     director: 'Some famous guy',
     starring: ['Eminem','Dr Dre','Mike Tyson'],
     runTime: 77,
-    genre: '',
+    genre: 'Comedy',
     released: 2007,
     isFavorite: true,
   }, {
@@ -52,7 +52,7 @@ export const films: Film[] = [
     director: 'Todd Philips',
     starring: ['Joaquin Phoenix', 'Ladder'],
     runTime: 68,
-    genre: 'Tragedy...or comedy?',
+    genre: 'Tragedy',
     released: 2014,
     isFavorite: false,
   }, {
@@ -88,7 +88,7 @@ export const films: Film[] = [
     director: '',
     starring: ['Имя','Имя','Имя'],
     runTime: 99,
-    genre: 'Мультфильм',
+    genre: 'Crime',
     released: 2020,
     isFavorite: true,
   }, {
@@ -124,7 +124,7 @@ export const films: Film[] = [
     director: 'Маргулан',
     starring: ['Маргулан','Книги'],
     runTime: 5.5,
-    genre: 'Комедия',
+    genre: 'Ski-fi',
     released: 2008,
     isFavorite: false,
   }, {
@@ -145,6 +145,62 @@ export const films: Film[] = [
     genre: 'Detective',
     released: 2003,
     isFavorite: false,
-
+  },
+  {
+    id : 9,
+    name: 'example',
+    posterImage: 'img/revenant.jpg',
+    previewImage: 'img/revenant.jpg',
+    backgroundImage: 'img/revenant.jpg',
+    backgroundColor: '#483D8B',
+    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    description: 'А он всего шесть написал...',
+    rating: 8.8,
+    scoresCount: 666,
+    director: 'Маргулан',
+    starring: ['Маргулан','Книги'],
+    runTime: 5.5,
+    genre: 'Ski-fi',
+    released: 2008,
+    isFavorite: false,
+  },
+  {
+    id : 10,
+    name: 'Sherlock',
+    posterImage: 'img/moonrise-kingdom.jpg',
+    previewImage: 'img/moonrise-kingdom.jpg',
+    backgroundImage: 'img/moonrise-kingdom.jpg',
+    backgroundColor: '#483D8B',
+    videoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    previewVideoLink: 'https://upload.wikimedia.org/wikipedia/commons/transcoded/b/b3/Big_Buck_Bunny_Trailer_400p.ogv/Big_Buck_Bunny_Trailer_400p.ogv.360p.webm',
+    description: 'Шерлок Омск',
+    rating: 7.7,
+    scoresCount: 330,
+    director: 'Джон Ватсон',
+    starring: ['Бенедикт Камбербэтч'],
+    runTime: 90,
+    genre: 'Detective',
+    released: 2003,
+    isFavorite: false,
+  },
+  {
+    id : 11,
+    name: 'example',
+    posterImage: 'img/revenant.jpg',
+    previewImage: 'img/revenant.jpg',
+    backgroundImage: 'img/revenant.jpg',
+    backgroundColor: '#483D8B',
+    videoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    previewVideoLink: 'https://download.blender.org/durian/trailer/sintel_trailer-480p.mp4',
+    description: 'А он всего шесть написал...',
+    rating: 8.8,
+    scoresCount: 666,
+    director: 'Маргулан',
+    starring: ['Маргулан','Книги'],
+    runTime: 5.5,
+    genre: 'Ski-fi',
+    released: 2008,
+    isFavorite: false,
   },
 ];
