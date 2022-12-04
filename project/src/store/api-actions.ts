@@ -6,7 +6,7 @@ import {Films} from '../types/film-type.js';
 import { commentsAction, loadFilmsAction, requireAuthorization } from './action';
 import { AuthData } from '../types/auth-data.js';
 import { UserData } from '../types/user-data.js';
-import { dropToken, saveToken } from '../services/token.js';
+import { dropToken, saveToken } from '../services/token';
 import { Comments } from '../types/comment-type.js';
 
 export const fetchFilmsAction = createAsyncThunk<void, undefined, {
