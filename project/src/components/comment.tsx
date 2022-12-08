@@ -1,10 +1,17 @@
 import React, {ChangeEvent, useState} from 'react';
 
 function AddComment () : JSX.Element {
+
   const [commentState, setCommentState] = useState('');
-  const onChangeHandler = ({ target }: ChangeEvent<HTMLTextAreaElement>) => {
+  const onChangeHandler = ({target}: ChangeEvent<HTMLTextAreaElement>) => {
     setCommentState(target.value);
   };
+  /*
+  const dispatch = useAppDispatch();
+  useEffect(()=> {
+    dispatch(setNewCommentAction(commentState));
+  });
+*/
   return (
     <form action="#" className="add-review__form">
       <div className="rating">

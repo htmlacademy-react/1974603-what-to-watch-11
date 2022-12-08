@@ -39,13 +39,17 @@ function FilmCard ({film}: Props): JSX.Element {
   const handleMouseLeave = () => {
     setPlaying(false);
   };
+  /*
+  const handleCardClick = () => {
+    console.log(film.id);
+  };*/
 
-  const {name, posterImage, previewVideoLink} = film;
+  const {name, previewImage, previewVideoLink} = film;
   return (
     <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Link to="/films/:id" className="small-film-card__link">
+      <Link to= {`/films/{${film.id.toString()}}`} className="small-film-card__link">
         <div className="small-film-card__image">
-          <VideoPlayer src={previewVideoLink} poster={posterImage} ref={videoRef} />
+          <VideoPlayer src={previewVideoLink} poster={previewImage} ref={videoRef} />
         </div>
         <h3 className="small-film-card__title">{name}</h3>
       </Link>

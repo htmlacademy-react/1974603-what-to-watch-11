@@ -9,4 +9,3 @@ name: string;
 };
 };
 
-export type Comments = Comment[];

@@ -1,13 +1,12 @@
 import { Link } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { changeGenreAction } from '../store/action';
-import {selectFilm, selectGenre} from '../store/selector';
+import {selectGenre, selectGenres} from '../store/selector';
 
 function GenreList () : JSX.Element {
   const dispatch = useAppDispatch();
   const selectedGenre = useAppSelector(selectGenre);
-  const films = useAppSelector(selectFilm);
-  const genres = Array.from(new Set((films.map((item) => item.genre))));
+  const genres = useAppSelector(selectGenres);
 
   const handleAllGenreClick = () => {
     dispatch(changeGenreAction('All genres'));
