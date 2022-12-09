@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import MainPage from '../../pages/main-page';
 import {Route, Routes} from 'react-router-dom';
 import NotFoundPage from '../../pages/not-found-page';
@@ -10,7 +9,7 @@ import AddReviewPage from '../../pages/add-review-page';
 import PlayerPage from '../../pages/player-page';
 import PrivateRoute from '../../components/private-route';
 import { useAppSelector } from '../../hooks';
-import {selectAuthorizationStatus, selectFilm, selectFilms, selectFilmsLoading} from '../../store/selector';
+import {selectAuthorizationStatus, selectFilms, selectFilmsLoading} from '../../store/selector';
 import LoadingScreen from '../../pages/loading-page';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
@@ -27,8 +26,7 @@ function App({title, genre, releaseData} : Props): JSX.Element {
 
   const films = useAppSelector(selectFilms);
   const isFilmsLoading = useAppSelector(selectFilmsLoading);
-  const film = useAppSelector(selectFilm);
-  console.log(film);
+  //const film = useAppSelector(selectFilm);
   if (authorizationStatus === AuthorizationStatus.Unknown || isFilmsLoading) {
     <LoadingScreen />;
   }
