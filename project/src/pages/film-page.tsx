@@ -13,12 +13,11 @@ film: Film;
 films: Film[];
 }
 
-function FilmPage({film, films} : Props): JSX.Element {
+function FilmPage({films, film} : Props): JSX.Element {
   const similarFilms = films.filter((item) => item.genre === film.genre).slice(0,4);
   const dispatch = useAppDispatch();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const {id} = useParams();
-  //const selectedFilm = useAppSelector(selectFilm);
 
   useEffect(()=>{
     if (id) {
