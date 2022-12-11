@@ -2,33 +2,27 @@ import React, { useEffect, useState } from 'react';
 import {Link} from 'react-router-dom';
 import FilmsListComponent from '../components/film-list';
 import GenreList from '../components/genres-list';
-import { ONE_PART_OF_THE_FILMS } from '../const';
+import {ONE_PART_OF_THE_FILMS } from '../const';
 import ShowMoreButton from '../components/show-more-button';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectFilm } from '../store/selector';
-import { setFilmsAction } from '../store/action';
+import {useAppSelector } from '../hooks';
+import {selectFilms} from '../store/selector';
+import Header from '../components/header/header';
 
-type Props = {
-  title: string;
-  genre: string;
-  releaseData: number;
-}
-
-function MainPage({title, genre, releaseData} : Props): JSX.Element {
+function MainPage(): JSX.Element {
   const [filmCount, setFilmCount] = useState(ONE_PART_OF_THE_FILMS);
-  const storeFilms = useAppSelector(selectFilm);
-  const dispatch = useAppDispatch();
+  const storeFilms = useAppSelector(selectFilms);
   const films = storeFilms.slice(0,filmCount);
+
   const handleShowMoreButton = () => {
     setFilmCount(filmCount + ONE_PART_OF_THE_FILMS);
   };
 
   useEffect(() => {
-    dispatch(setFilmsAction(films));
-  });
+    setFilmCount(ONE_PART_OF_THE_FILMS);
+  },[storeFilms]);
 
   return (
-    <React.Fragment>
+    <>
       <section className="film-card">
         <div className="film-card__bg">
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
@@ -42,18 +36,7 @@ function MainPage({title, genre, releaseData} : Props): JSX.Element {
               <span className="logo__letter logo__letter--3">W</span>
             </Link>
           </div>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <Link to="/mylist">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-                </Link>
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to ="/login" className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <Header/>
         </header>
         <div className="film-card__wrap">
           <div className="film-card__info">
@@ -61,11 +44,11 @@ function MainPage({title, genre, releaseData} : Props): JSX.Element {
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseData}</span>
-              </p>
+              {/*<h2 className="film-card__title">{film.title}</h2>*/}
+              {/*<p className="film-card__meta">*/}
+              {/*<span className="film-card__genre">{genre}</span>*/}
+              {/*<span className="film-card__year">{releaseData}</span>*/}
+              {/*</p>*/}
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
@@ -90,7 +73,7 @@ function MainPage({title, genre, releaseData} : Props): JSX.Element {
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList />
           <FilmsListComponent films = {films} />
-          {storeFilms.length > ONE_PART_OF_THE_FILMS ? <ShowMoreButton onButtonClick={handleShowMoreButton} /> : ''}
+          {storeFilms.length > filmCount ? <ShowMoreButton onButtonClick={handleShowMoreButton} /> : ''}
         </section>
         <footer className="page-footer">
           <div className="logo">
@@ -105,7 +88,7 @@ function MainPage({title, genre, releaseData} : Props): JSX.Element {
           </div>
         </footer>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 export default MainPage;

@@ -1,12 +1,15 @@
-import {Film} from '../types/film-type';
 import {Link} from 'react-router-dom';
-import AddComment from '../components/comment';
+import { useAppSelector } from '../hooks';
+import { selectFilm } from '../store/selector';
+import Loading from '../components/loading';
+import AddComment from '../components/add-comment';
+function AddReviewPage() : JSX.Element {
+  const film = useAppSelector(selectFilm);
 
-type Props = {
-  film: Film;
-}
+  if (!film) {
+    return <Loading />;
+  }
 
-function AddReviewPage({film} : Props) : JSX.Element {
   return (
     <section className="film-card film-card--full">
       <div className="film-card__header">

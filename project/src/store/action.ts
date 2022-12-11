@@ -1,10 +1,16 @@
 import {createAction} from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../const';
-import { Comments } from '../types/comment-type';
-import {Films} from '../types/film-type';
+import { AppRoute, AuthorizationStatus } from '../const';
+import {Comment} from '../types/comment-type';
+import {Film} from '../types/film-type';
+import { UserData } from '../types/user-data';
 
 export const changeGenreAction = createAction<string>('data/changeGenreAction');
-export const setFilmsAction = createAction<Films>('data/setFilmsAction');
-export const loadFilmsAction = createAction<Films>('data/loadFilmsAction');
+export const setFilmsAction = createAction<Film[]>('data/setFilmsAction');
+export const setFilmAction = createAction<Film>('data/setFilmAction');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
-export const commentsAction = createAction<Comments>('data/comments');
+export const setCommentsAction = createAction<Comment[]>('data/comments');
+export const setNewCommentAction = createAction<Comment>('data/newComment');
+export const setFilmsLoadingAction = createAction<boolean>('data/loadingFilms');
+export const redirectToRoute = createAction<AppRoute>('data/redirectToRoute');
+export const setUserDataAction = createAction<UserData>('user/userData');
+export const setError = createAction<string | null>('data/setError');

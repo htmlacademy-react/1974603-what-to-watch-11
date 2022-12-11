@@ -1,32 +1,66 @@
 import {createReducer} from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../const';
-import {films} from '../mocks/films';
-import { Films } from '../types/film-type';
-import {changeGenreAction, loadFilmsAction, requireAuthorization, setFilmsAction} from './action';
+import { Comment } from '../types/comment-type';
+import { Film } from '../types/film-type';
+import { UserData } from '../types/user-data';
+import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setUserDataAction} from './action';
 
-type InitalState = {
+type InitialState = {
+  allFilms: Film[];
+  films: Film[];
+  film: Film | undefined;
   genre: string;
-  films: Films;
+  genres: string [];
+  loading: boolean;
+  userData: UserData | undefined;
+  error: string | null;
+  comments: Comment[];
+  comment: Comment | undefined;
   authorizationStatus: AuthorizationStatus;
 }
 
-const initialState: InitalState = {
-  genre: 'All genres',
+const initialState: InitialState = {
+  allFilms: [],
   films: [],
+  film: undefined,
+  genre: 'All genres',
+  genres: [],
+  loading: false,
+  userData: undefined,
+  error: null,
+  comments: [],
+  comment: undefined,
   authorizationStatus: AuthorizationStatus.Unknown
 };
 
 const reducer = createReducer(initialState, (builder) => {
   builder
+    .addCase(setFilmsLoadingAction, (state, action) => {
+      state.loading = action.payload;
+    })
+    .addCase(setError, (state, action) => {
+      state.error = action.payload;
+    })
     .addCase(changeGenreAction, (state, action) => {
       state.genre = action.payload;
-      state.films = action.payload === 'All genres' ? films : films.filter((item) => item.genre === action.payload);
+      state.films = action.payload === 'All genres' ? state.allFilms : state.allFilms.filter((item) => item.genre === action.payload);
     })
     .addCase(setFilmsAction, (state, action) => {
+      state.allFilms = action.payload;
       state.films = action.payload;
+      state.genres = Array.from(new Set((action.payload.map((item) => item.genre))));
     })
-    .addCase(loadFilmsAction, (state, action) => {
-      state.films = action.payload;
+    .addCase(setFilmAction, (state, action) => {
+      state.film = action.payload;
+    })
+    .addCase(setUserDataAction, (state, action) => {
+      state.userData = action.payload;
+    })
+    .addCase(setNewCommentAction, (state, action) => {
+      state.comment = action.payload;
+    })
+    .addCase(setCommentsAction, (state, action) => {
+      state.comments = action.payload;
     })
     .addCase(requireAuthorization, (state, action) => {
       state.authorizationStatus = action.payload;

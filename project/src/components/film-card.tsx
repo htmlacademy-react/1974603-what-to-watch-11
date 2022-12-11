@@ -1,12 +1,12 @@
 import {useState, useRef, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import { TYME_DELAY } from '../const';
 import {Film} from '../types/film-type';
 import VideoPlayer from './video-player';
 
 type Props = {
 film: Film;
 }
-const TYME_DELAY = 1000;
 
 function FilmCard ({film}: Props): JSX.Element {
   const [playing, setPlaying] = useState(false);
@@ -40,12 +40,12 @@ function FilmCard ({film}: Props): JSX.Element {
     setPlaying(false);
   };
 
-  const {name, posterImage, previewVideoLink} = film;
+  const {name, previewImage, previewVideoLink} = film;
   return (
     <article className="small-film-card catalog__films-card" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
-      <Link to="/films/:id" className="small-film-card__link">
+      <Link to= {`/films/${film.id}`} className="small-film-card__link">
         <div className="small-film-card__image">
-          <VideoPlayer src={previewVideoLink} poster={posterImage} ref={videoRef} />
+          <VideoPlayer src={previewVideoLink} poster={previewImage} ref={videoRef} />
         </div>
         <h3 className="small-film-card__title">{name}</h3>
       </Link>
