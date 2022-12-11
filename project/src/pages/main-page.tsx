@@ -4,38 +4,25 @@ import FilmsListComponent from '../components/film-list';
 import GenreList from '../components/genres-list';
 import {ONE_PART_OF_THE_FILMS } from '../const';
 import ShowMoreButton from '../components/show-more-button';
-import { useAppDispatch, useAppSelector } from '../hooks';
+import {useAppSelector } from '../hooks';
 import {selectFilms} from '../store/selector';
-import { fetchFilmsAction} from '../store/api-actions';
 import Header from '../components/header/header';
 
-type Props = {
-  title: string;
-  genre: string;
-  releaseData: number;
-}
-
-function MainPage({title, genre, releaseData} : Props): JSX.Element {
+function MainPage(): JSX.Element {
   const [filmCount, setFilmCount] = useState(ONE_PART_OF_THE_FILMS);
   const storeFilms = useAppSelector(selectFilms);
-  const dispatch = useAppDispatch();
   const films = storeFilms.slice(0,filmCount);
-  //const authorizationStatus = useAppSelector(selectAuthorizationStatus);
 
   const handleShowMoreButton = () => {
     setFilmCount(filmCount + ONE_PART_OF_THE_FILMS);
   };
 
   useEffect(() => {
-    dispatch(fetchFilmsAction());
-  },[dispatch]);
-
-  useEffect(() => {
     setFilmCount(ONE_PART_OF_THE_FILMS);
   },[storeFilms]);
 
   return (
-    <React.Fragment>
+    <>
       <section className="film-card">
         <div className="film-card__bg">
           <img src="img/bg-the-grand-budapest-hotel.jpg" alt="The Grand Budapest Hotel" />
@@ -57,11 +44,11 @@ function MainPage({title, genre, releaseData} : Props): JSX.Element {
               <img src="img/the-grand-budapest-hotel-poster.jpg" alt="The Grand Budapest Hotel poster" width="218" height="327" />
             </div>
             <div className="film-card__desc">
-              <h2 className="film-card__title">{title}</h2>
-              <p className="film-card__meta">
-                <span className="film-card__genre">{genre}</span>
-                <span className="film-card__year">{releaseData}</span>
-              </p>
+              {/*<h2 className="film-card__title">{film.title}</h2>*/}
+              {/*<p className="film-card__meta">*/}
+              {/*<span className="film-card__genre">{genre}</span>*/}
+              {/*<span className="film-card__year">{releaseData}</span>*/}
+              {/*</p>*/}
               <div className="film-card__buttons">
                 <button className="btn btn--play film-card__button" type="button">
                   <svg viewBox="0 0 19 19" width="19" height="19">
@@ -101,7 +88,7 @@ function MainPage({title, genre, releaseData} : Props): JSX.Element {
           </div>
         </footer>
       </div>
-    </React.Fragment>
+    </>
   );
 }
 export default MainPage;

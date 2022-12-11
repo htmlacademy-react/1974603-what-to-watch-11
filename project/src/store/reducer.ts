@@ -2,30 +2,31 @@ import {createReducer} from '@reduxjs/toolkit';
 import { AuthorizationStatus } from '../const';
 import { Comment } from '../types/comment-type';
 import { Film } from '../types/film-type';
-import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setUserNameAction, setError, setNewCommentAction, setCommentsAction} from './action';
+import { UserData } from '../types/user-data';
+import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setUserDataAction} from './action';
 
-type InitalState = {
+type InitialState = {
   allFilms: Film[];
   films: Film[];
   film: Film | undefined;
   genre: string;
   genres: string [];
   loading: boolean;
-  userName: string;
+  userData: UserData | undefined;
   error: string | null;
   comments: Comment[];
   comment: Comment | undefined;
   authorizationStatus: AuthorizationStatus;
 }
 
-const initialState: InitalState = {
+const initialState: InitialState = {
   allFilms: [],
   films: [],
   film: undefined,
   genre: 'All genres',
   genres: [],
   loading: false,
-  userName: '',
+  userData: undefined,
   error: null,
   comments: [],
   comment: undefined,
@@ -52,8 +53,8 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setFilmAction, (state, action) => {
       state.film = action.payload;
     })
-    .addCase(setUserNameAction, (state, action) => {
-      state.userName = action.payload;
+    .addCase(setUserDataAction, (state, action) => {
+      state.userData = action.payload;
     })
     .addCase(setNewCommentAction, (state, action) => {
       state.comment = action.payload;

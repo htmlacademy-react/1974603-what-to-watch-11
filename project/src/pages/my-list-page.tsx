@@ -1,12 +1,15 @@
-import {Film} from '../types/film-type';
 import FilmsListComponent from '../components/film-list';
 import { Link } from 'react-router-dom';
+import { useAppSelector } from '../hooks';
+import {selectFilms } from '../store/selector';
+import Loading from '../components/loading';
 
-type Props = {
-  films: Film[];
-}
+function MyListPage(): JSX.Element {
+  const films = useAppSelector(selectFilms);
 
-function MyListPage({films} : Props): JSX.Element {
+  if (!films) {
+    return <Loading />;
+  }
 
   return (
     <div className="user-page">
@@ -42,7 +45,6 @@ function MyListPage({films} : Props): JSX.Element {
             <span className="logo__letter logo__letter--3">W</span>
           </Link>
         </div>
-
         <div className="copyright">
           <p>© 2019 What to watch Ltd.</p>
         </div>

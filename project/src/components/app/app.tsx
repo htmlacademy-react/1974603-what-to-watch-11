@@ -9,26 +9,20 @@ import AddReviewPage from '../../pages/add-review-page';
 import PlayerPage from '../../pages/player-page';
 import PrivateRoute from '../../components/private-route';
 import { useAppSelector } from '../../hooks';
-import {selectAuthorizationStatus, selectFilms, selectFilmsLoading} from '../../store/selector';
-import LoadingScreen from '../../pages/loading-page';
+import {selectAuthorizationStatus, selectFilmsLoading} from '../../store/selector';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { HelmetProvider } from 'react-helmet-async';
+import Loading from '../loading';
 
-type Props={
-  title: string;
-  genre: string;
-  releaseData: number;
-}
-
-function App({title, genre, releaseData} : Props): JSX.Element {
+function App(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
-
-  const films = useAppSelector(selectFilms);
   const isFilmsLoading = useAppSelector(selectFilmsLoading);
-  //const film = useAppSelector(selectFilm);
+
   if (authorizationStatus === AuthorizationStatus.Unknown || isFilmsLoading) {
-    <LoadingScreen />;
+    return (
+      <Loading />
+    );
   }
 
   return (
@@ -37,7 +31,7 @@ function App({title, genre, releaseData} : Props): JSX.Element {
         <Routes>
           <Route
             path={AppRoute.Main}
-            element={<MainPage title={title} genre={genre} releaseData={releaseData} />}
+            element={<MainPage />}
           />
           <Route
             path={AppRoute.SignIn}
@@ -49,21 +43,21 @@ function App({title, genre, releaseData} : Props): JSX.Element {
               <PrivateRoute
                 authorizationStatus={authorizationStatus}
               >
-                <MyListPage films={films} />
+                <MyListPage />
               </PrivateRoute>
             }
           />
           <Route
             path={AppRoute.Film}
-            element={<FilmPage film = {films[0]} films = {films} />}
+            element={<FilmPage />}
           />
           <Route
             path={AppRoute.AddReview}
-            element={<AddReviewPage film ={films[0]} />}
+            element={<AddReviewPage />}
           />
           <Route
             path={AppRoute.Player}
-            element={<PlayerPage film={films[0]} />}
+            element={<PlayerPage />}
           />
           <Route
             path="*"

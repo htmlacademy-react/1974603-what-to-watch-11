@@ -27,3 +27,6 @@ export enum APIRoute {
 
 export const ONE_PART_OF_THE_FILMS = 8;
 export const TIMEOUT_SHOW_ERROR = 4000;
+export const TYME_DELAY = 1000;
+export const MIN_COMMENT_LENGTH = 50;
+export const MAX_COMMENT_LENGTH = 400;

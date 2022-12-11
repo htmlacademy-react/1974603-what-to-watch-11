@@ -1,12 +1,12 @@
 import {useState, useRef, useEffect} from 'react';
 import {Link} from 'react-router-dom';
+import { TYME_DELAY } from '../const';
 import {Film} from '../types/film-type';
 import VideoPlayer from './video-player';
 
 type Props = {
 film: Film;
 }
-const TYME_DELAY = 1000;
 
 function FilmCard ({film}: Props): JSX.Element {
   const [playing, setPlaying] = useState(false);
@@ -39,11 +39,6 @@ function FilmCard ({film}: Props): JSX.Element {
   const handleMouseLeave = () => {
     setPlaying(false);
   };
-
-  /*
-  const handleCardClick = () => {
-    console.log(film.id);
-  };*/
 
   const {name, previewImage, previewVideoLink} = film;
   return (

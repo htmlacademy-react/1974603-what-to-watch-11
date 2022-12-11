@@ -1,5 +1,6 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
+import {Comment} from '../types/comment-type';
 import {Film} from '../types/film-type';
 import DetailsTab from './details-tab';
 import OverviewTab from './overview-tab';
@@ -7,6 +8,7 @@ import ReviewsTab from './reviews-tab';
 
 type Props={
   film: Film;
+  comments: Comment[];
 }
 
 enum Tabs {
@@ -15,7 +17,7 @@ enum Tabs {
   Reviews
 }
 
-function FilmTabs ({film}: Props) : JSX.Element {
+function FilmTabs ({film, comments}: Props) : JSX.Element {
   const [selectedTab, setSelectedTab] = useState<Tabs>(Tabs.Overview);
 
   const handleOverviewClick = () => {
@@ -35,13 +37,13 @@ function FilmTabs ({film}: Props) : JSX.Element {
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
           <li className="film-nav__item film-nav__item--active">
-            <Link to ="/" className="film-nav__link" onClick={handleOverviewClick}>Overview</Link>
+            <Link to ="#" className="film-nav__link" onClick={handleOverviewClick}>Overview</Link>
           </li>
           <li className="film-nav__item">
-            <Link to ="/" className="film-nav__link" onClick={handleDetailsClick}>Details</Link>
+            <Link to ="#" className="film-nav__link" onClick={handleDetailsClick}>Details</Link>
           </li>
           <li className="film-nav__item">
-            <Link to ="/" className="film-nav__link" onClick={handleReviewsClick}>Reviews</Link>
+            <Link to ="#" className="film-nav__link" onClick={handleReviewsClick}>Reviews</Link>
           </li>
         </ul>
       </nav>
