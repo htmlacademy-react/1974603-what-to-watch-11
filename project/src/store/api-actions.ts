@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
@@ -67,7 +68,8 @@ export const fetchCommentsListAction = createAsyncThunk<void, Comment, {
 }>(
   'data/commentsList',
   async (comment, {dispatch, extra: api}) => {
-    const {data} = await api.get<Comment[]>(`/comments/${comment.user.id}`);
+    const {data} = await api.get<Comment[]>(`comments/${comment.user.id}`);
+    console.log(data);
     dispatch(setCommentsAction(data));
   },
 );

@@ -12,5 +12,5 @@ export const setCommentsAction = createAction<Comment[]>('data/comments');
 export const setNewCommentAction = createAction<Comment>('data/newComment');
 export const setFilmsLoadingAction = createAction<boolean>('data/loadingFilms');
 export const redirectToRoute = createAction<AppRoute>('data/redirectToRoute');
-export const setUserDataAction = createAction<UserData>('data/userData');
+export const setUserDataAction = createAction<UserData>('user/userData');
 export const setError = createAction<string | null>('data/setError');
