@@ -2,12 +2,12 @@ import {Link} from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
-import { selectAuthorizationStatus, selectUserName } from '../../store/selector';
+import {selectAuthorizationStatus, selectUserName} from '../../store/selector';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUserName);
+  const userAvatar = useAppSelector(selectUserName);
 
   if(authorizationStatus === AuthorizationStatus.Auth) {
     return (
@@ -15,7 +15,7 @@ function Header(): JSX.Element {
         <li className="user-block__item">
           <div className="user-block__avatar">
             <Link to="/mylist">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              <img src={userAvatar} alt="User avatar" width="63" height="63" />
             </Link>
           </div>
         </li>
@@ -25,15 +25,17 @@ function Header(): JSX.Element {
             onClick={(evt) => {
               evt.preventDefault();
               dispatch(logoutAction());
-            }}
-            to ="/login"
+            } }
+            to="/login"
           >
-            {user}  Sing Out
+              Sing Out
           </Link>
         </li>
       </ul>
+
     );
   }
+
   return (
     <div className="user-block">
       <Link

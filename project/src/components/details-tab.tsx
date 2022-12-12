@@ -1,3 +1,4 @@
+import { formatMinutes } from '../const';
 import {Film} from '../types/film-type';
 
 type Props={
@@ -22,7 +23,7 @@ function DetailsTab ({film}: Props) : JSX.Element {
       <div className="film-card__text-col">
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Run Time</strong>
-          <span className="film-card__details-value">{film.runTime}</span>
+          <span className="film-card__details-value">{formatMinutes(film.runTime)}</span>
         </p>
         <p className="film-card__details-item">
           <strong className="film-card__details-name">Genre</strong>

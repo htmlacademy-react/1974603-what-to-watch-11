@@ -3,17 +3,18 @@ import { AuthorizationStatus } from '../const';
 import { Comment } from '../types/comment-type';
 import { Film } from '../types/film-type';
 import { UserData } from '../types/user-data';
-import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setUserDataAction} from './action';
+import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction} from './action';
 
 type InitialState = {
   allFilms: Film[];
   films: Film[];
   film: Film | undefined;
+  promoFilm: Film | undefined;
   genre: string;
   genres: string [];
   loading: boolean;
-  userData: UserData | undefined;
   error: string | null;
+  userData: UserData | undefined;
   comments: Comment[];
   comment: Comment | undefined;
   authorizationStatus: AuthorizationStatus;
@@ -23,6 +24,7 @@ const initialState: InitialState = {
   allFilms: [],
   films: [],
   film: undefined,
+  promoFilm: undefined,
   genre: 'All genres',
   genres: [],
   loading: false,
@@ -50,11 +52,14 @@ const reducer = createReducer(initialState, (builder) => {
       state.films = action.payload;
       state.genres = Array.from(new Set((action.payload.map((item) => item.genre))));
     })
+    .addCase(setUserDataAction, (state, action) => {
+      state.userData = action.payload;
+    })
     .addCase(setFilmAction, (state, action) => {
       state.film = action.payload;
     })
-    .addCase(setUserDataAction, (state, action) => {
-      state.userData = action.payload;
+    .addCase(setPromoFilmAction, (state, action) => {
+      state.promoFilm = action.payload;
     })
     .addCase(setNewCommentAction, (state, action) => {
       state.comment = action.payload;

@@ -6,11 +6,12 @@ import { UserData } from '../types/user-data';
 
 export const changeGenreAction = createAction<string>('data/changeGenreAction');
 export const setFilmsAction = createAction<Film[]>('data/setFilmsAction');
-export const setFilmAction = createAction<Film>('data/setFilmAction');
+export const setFilmAction = createAction<Film | undefined>('data/setFilmAction');
+export const setPromoFilmAction = createAction<Film | undefined>('data/setPromoFilmAction');
 export const requireAuthorization = createAction<AuthorizationStatus>('user/requireAuthorization');
 export const setCommentsAction = createAction<Comment[]>('data/comments');
 export const setNewCommentAction = createAction<Comment>('data/newComment');
 export const setFilmsLoadingAction = createAction<boolean>('data/loadingFilms');
-export const redirectToRoute = createAction<AppRoute>('data/redirectToRoute');
 export const setUserDataAction = createAction<UserData>('user/userData');
+export const redirectToRoute = createAction<AppRoute>('data/redirectToRoute');
 export const setError = createAction<string | null>('data/setError');

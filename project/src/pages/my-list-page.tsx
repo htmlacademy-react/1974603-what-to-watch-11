@@ -1,11 +1,13 @@
 import FilmsListComponent from '../components/film-list';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
-import {selectFilms } from '../store/selector';
+import {selectFilms, selectUserName } from '../store/selector';
 import Loading from '../components/loading';
+import Footer from '../components/footer';
 
 function MyListPage(): JSX.Element {
   const films = useAppSelector(selectFilms);
+  const userAvatar = useAppSelector(selectUserName);
 
   if (!films) {
     return <Loading />;
@@ -25,7 +27,9 @@ function MyListPage(): JSX.Element {
         <ul className="user-block">
           <li className="user-block__item">
             <div className="user-block__avatar">
-              <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+              <Link to="/mylist">
+                <img src={userAvatar} alt="User avatar" width="63" height="63" />
+              </Link>
             </div>
           </li>
           <li className="user-block__item">
@@ -37,18 +41,7 @@ function MyListPage(): JSX.Element {
         <h2 className="catalog__title visually-hidden">Catalog</h2>
         <FilmsListComponent films = {films}/>
       </section>
-      <footer className="page-footer">
-        <div className="logo">
-          <Link to ="/" className="logo__link logo__link--light">
-            <span className="logo__letter logo__letter--1">W</span>
-            <span className="logo__letter logo__letter--2">T</span>
-            <span className="logo__letter logo__letter--3">W</span>
-          </Link>
-        </div>
-        <div className="copyright">
-          <p>© 2019 What to watch Ltd.</p>
-        </div>
-      </footer>
+      <Footer/>
     </div>
   );
 }

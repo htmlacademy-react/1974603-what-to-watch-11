@@ -1,13 +1,13 @@
-/* eslint-disable no-console */
 import { useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../components/film-list';
+import Footer from '../components/footer';
 import Loading from '../components/loading';
 import FilmTabs from '../components/tabs';
 import { AuthorizationStatus } from '../const';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchFilmAction } from '../store/api-actions';
-import { selectAuthorizationStatus, selectComments, selectFilm, selectFilms, selectFilmsLoading} from '../store/selector';
+import { fetchCommentsListAction, fetchFilmAction } from '../store/api-actions';
+import { selectAuthorizationStatus, selectComments, selectFilm, selectFilms, selectFilmsLoading, selectUserName} from '../store/selector';
 
 function FilmPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,10 +17,12 @@ function FilmPage(): JSX.Element {
   const film = useAppSelector(selectFilm);
   const comments = useAppSelector(selectComments);
   const isFilmsLoading = useAppSelector(selectFilmsLoading);
-  console.log(comments);
+  const userAvatar = useAppSelector(selectUserName);
+
   useEffect(()=>{
     if (id && !isFilmsLoading) {
       dispatch(fetchFilmAction(id));
+      dispatch(fetchCommentsListAction(id));
     }
   }, [dispatch, id, isFilmsLoading]);
 
@@ -49,7 +51,7 @@ function FilmPage(): JSX.Element {
             <ul className="user-block">
               <li className="user-block__item">
                 <div className="user-block__avatar">
-                  <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
+                  <img src={userAvatar} alt="User avatar" width="63" height="63" />
                 </div>
               </li>
               <li className="user-block__item">
@@ -65,12 +67,12 @@ function FilmPage(): JSX.Element {
                 <span className="film-card__year">{film.released}</span>
               </p>
               <div className="film-card__buttons">
-                <button className="btn btn--play film-card__button" type="button">
+                <Link className="btn btn--play film-card__button" to={`/player/${film.id}`}>
                   <svg viewBox="0 0 19 19" width="19" height="19">
                     <use xlinkHref="#play-s"></use>
                   </svg>
                   <span>Play</span>
-                </button>
+                </Link>
                 <button className="btn btn--list film-card__button" type="button">
                   <svg viewBox="0 0 19 20" width="19" height="20">
                     <use xlinkHref="#add"></use>
@@ -97,18 +99,7 @@ function FilmPage(): JSX.Element {
           <h2 className="catalog__title">More like this</h2>
           <FilmsList films={similarFilms} />
         </section>
-        <footer className="page-footer">
-          <div className="logo">
-            <Link to="/" className="logo__link logo__link--light">
-              <span className="logo__letter logo__letter--1">W</span>
-              <span className="logo__letter logo__letter--2">T</span>
-              <span className="logo__letter logo__letter--3">W</span>
-            </Link>
-          </div>
-          <div className="copyright">
-            <p>© 2019 What to watch Ltd.</p>
-          </div>
-        </footer>
+        <Footer />
       </div>
     </>
   );

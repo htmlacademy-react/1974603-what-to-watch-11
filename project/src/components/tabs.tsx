@@ -36,13 +36,13 @@ function FilmTabs ({film, comments}: Props) : JSX.Element {
     <div className="film-card__desc">
       <nav className="film-nav film-card__nav">
         <ul className="film-nav__list">
-          <li className="film-nav__item film-nav__item--active">
+          <li className={`film-nav__item ${selectedTab === Tabs.Overview ? 'film-nav__item--active' : ''}`}>
             <Link to ="#" className="film-nav__link" onClick={handleOverviewClick}>Overview</Link>
           </li>
-          <li className="film-nav__item">
+          <li className={`film-nav__item ${selectedTab === Tabs.Details ? 'film-nav__item--active' : ''}`}>
             <Link to ="#" className="film-nav__link" onClick={handleDetailsClick}>Details</Link>
           </li>
-          <li className="film-nav__item">
+          <li className={`film-nav__item ${selectedTab === Tabs.Reviews ? 'film-nav__item--active' : ''}`}>
             <Link to ="#" className="film-nav__link" onClick={handleReviewsClick}>Reviews</Link>
           </li>
         </ul>
