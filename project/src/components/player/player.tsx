@@ -17,7 +17,7 @@ const getFormattedDuration = (seconds: number) => {
   return dayjs.duration(seconds, 'seconds').format(seconds > SECONDS_IN_HOUR ? 'HH:mm:ss' : 'mm:ss');
 };
 
-function Player({name, link}: Props): JSX.Element {
+function Player ({name, link}: Props): JSX.Element {
   const playerRef = useRef<HTMLDivElement>(null);
   const player = playerRef.current;
 

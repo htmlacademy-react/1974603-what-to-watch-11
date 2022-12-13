@@ -4,7 +4,7 @@ type Props = {
   poster: string;
 }
 
-function Player ({src, poster} : Props, ref: ForwardedRef<HTMLVideoElement>) : JSX.Element {
+function PreviewPlayer ({src, poster} : Props, ref: ForwardedRef<HTMLVideoElement>) : JSX.Element {
 
   return (
     <video className="player__video" poster={poster} ref={ref} muted>
@@ -12,5 +12,6 @@ function Player ({src, poster} : Props, ref: ForwardedRef<HTMLVideoElement>) : J
     </video>
   );
 }
-const VideoPlayer = forwardRef(Player);
+const VideoPlayer = forwardRef(PreviewPlayer);
+
 export default VideoPlayer;

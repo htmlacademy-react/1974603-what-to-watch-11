@@ -2,7 +2,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
-import {setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, redirectToRoute, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction} from './action';
+import {setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, redirectToRoute, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction, setFavoriteFilmsAction} from './action';
 import {AuthData} from '../types/auth-data.js';
 import {UserData} from '../types/user-data.js';
 import {dropToken, saveToken } from '../services/token';
@@ -49,7 +49,7 @@ export const similarFilmsAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const FetchPromoFilmAction = createAsyncThunk<void, undefined, {
+export const fetchPromoFilmAction = createAsyncThunk<void, undefined, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
@@ -58,6 +58,30 @@ export const FetchPromoFilmAction = createAsyncThunk<void, undefined, {
   async (_arg, {dispatch, extra: api}) => {
     const {data} = await api.get<Film>(APIRoute.Promo);
     dispatch(setPromoFilmAction(data));
+  },
+);
+
+export const fetchFavoriteFilmsAction = createAsyncThunk<void, undefined, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteFilms',
+  async (_arg, {dispatch, extra: api}) => {
+    const {data} = await api.get<Film[]>(APIRoute.Favorite);
+    dispatch(setFavoriteFilmsAction(data));
+  },
+);
+
+export const fetchFilmStatusAction = createAsyncThunk<void, boolean, {
+  dispatch: AppDispatch;
+  state: State;
+  extra: AxiosInstance;
+}>(
+  'data/fetchFavoriteFilms',
+  async (status, {dispatch, extra: api}) => {
+    //const {data} = await api.post<Film>(`${APIRoute.FilmStatus}/${film.id}/${status}`);
+    //dispatch(setFavoriteFilmsAction(data));
   },
 );
 

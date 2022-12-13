@@ -5,6 +5,10 @@ import { selectComments} from '../store/selector';
 function ReviewsTab () : JSX.Element {
   const comments = useAppSelector(selectComments);
 
+  if (comments.length === 0) {
+    return <p><b>No comments</b></p>;
+  }
+
   return(
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">

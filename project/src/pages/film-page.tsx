@@ -2,12 +2,13 @@ import { useEffect } from 'react';
 import {Link, useParams} from 'react-router-dom';
 import FilmsList from '../components/film-list';
 import Footer from '../components/footer';
+import Header from '../components/header/header';
 import Loading from '../components/loading';
 import FilmTabs from '../components/tabs';
-import { AuthorizationStatus } from '../const';
+import { AppRoute, AuthorizationStatus } from '../const';
 import { useAppDispatch, useAppSelector } from '../hooks';
 import { fetchCommentsListAction, fetchFilmAction } from '../store/api-actions';
-import { selectAuthorizationStatus, selectComments, selectFilm, selectFilms, selectFilmsLoading, selectUserName} from '../store/selector';
+import { selectAuthorizationStatus, selectComments, selectFilm, selectFilms, selectFilmsLoading} from '../store/selector';
 
 function FilmPage(): JSX.Element {
   const dispatch = useAppDispatch();
@@ -17,7 +18,6 @@ function FilmPage(): JSX.Element {
   const film = useAppSelector(selectFilm);
   const comments = useAppSelector(selectComments);
   const isFilmsLoading = useAppSelector(selectFilmsLoading);
-  const userAvatar = useAppSelector(selectUserName);
 
   useEffect(()=>{
     if (id && !isFilmsLoading) {
@@ -48,16 +48,7 @@ function FilmPage(): JSX.Element {
                 <span className="logo__letter logo__letter--3">W</span>
               </Link>
             </div>
-            <ul className="user-block">
-              <li className="user-block__item">
-                <div className="user-block__avatar">
-                  <img src={userAvatar} alt="User avatar" width="63" height="63" />
-                </div>
-              </li>
-              <li className="user-block__item">
-                <Link to="/login" className="user-block__link">Sign out</Link>
-              </li>
-            </ul>
+            <Header />
           </header>
           <div className="film-card__wrap">
             <div className="film-card__desc">
@@ -80,7 +71,7 @@ function FilmPage(): JSX.Element {
                   <span>My list</span>
                   <span className="film-card__count">9</span>
                 </button>
-                {authorizationStatus === AuthorizationStatus.Auth && <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link>}
+                {authorizationStatus === AuthorizationStatus.Auth ? <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link> : <Link to={AppRoute.SignIn} className="btn film-card__button">Add review</Link>}
               </div>
             </div>
           </div>

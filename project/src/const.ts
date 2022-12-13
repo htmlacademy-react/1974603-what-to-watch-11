@@ -24,7 +24,7 @@ export enum APIRoute {
   Similar = '/films/:id/similar',
   Promo = '/promo',
   Favorite = '/favorite',
-  StatusInWatch = '/favorite/:id/:status',
+  FilmStatus = '/favorite',
   Comments = '/comments/:id',
   Login = '/login',
   Logout = '/logout',
