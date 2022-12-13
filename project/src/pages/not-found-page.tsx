@@ -24,7 +24,7 @@ function NotFoundPage (): JSX.Element {
       </header>
       <section className= "not__found">
         <h1><b>404. Page not found</b></h1>
-        <a href = "/">Вернуться на главную</a>
+        <Link to= "/">Вернуться на главную</Link>
       </section>
     </section>
   );

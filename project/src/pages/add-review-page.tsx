@@ -1,8 +1,10 @@
 import {Link} from 'react-router-dom';
 import { useAppSelector } from '../hooks';
-import { selectFilm } from '../store/selector';
+import { selectFilm} from '../store/selector';
 import Loading from '../components/loading';
 import AddComment from '../components/add-comment';
+import Header from '../components/header/header';
+
 function AddReviewPage() : JSX.Element {
   const film = useAppSelector(selectFilm);
 
@@ -28,23 +30,14 @@ function AddReviewPage() : JSX.Element {
           <nav className="breadcrumbs">
             <ul className="breadcrumbs__list">
               <li className="breadcrumbs__item">
-                <Link to="/films/:id" className="breadcrumbs__link">{film.name}</Link>
+                <Link to={`/films/${film.id}`} className="breadcrumbs__link">{film.name}</Link>
               </li>
               <li className="breadcrumbs__item">
-                <Link to="/films/:id/review" className="breadcrumbs__link">Add review</Link>
+                <Link to= {`/films/${film.id}/review`} className="breadcrumbs__link">Add review</Link>
               </li>
             </ul>
           </nav>
-          <ul className="user-block">
-            <li className="user-block__item">
-              <div className="user-block__avatar">
-                <img src="img/avatar.jpg" alt="User avatar" width="63" height="63" />
-              </div>
-            </li>
-            <li className="user-block__item">
-              <Link to= "/login" className="user-block__link">Sign out</Link>
-            </li>
-          </ul>
+          <Header />
         </header>
         <div className="film-card__poster film-card__poster--small">
           <img src={film.posterImage} alt={film.name} width="218" height="327" />

@@ -1,22 +1,29 @@
+import { formatDate } from '../const';
 import { useAppSelector } from '../hooks';
-import { selectNewComment } from '../store/selector';
+import { selectComments} from '../store/selector';
 
 function ReviewsTab () : JSX.Element {
-  const comment = useAppSelector(selectNewComment);
+  const comments = useAppSelector(selectComments);
+
+  if (comments.length === 0) {
+    return <p><b>No comments</b></p>;
+  }
 
   return(
     <div className="film-card__reviews film-card__row">
       <div className="film-card__reviews-col">
-        <div className="review">
-          <blockquote className="review__quote">
-            <p className="review__text">{comment?.comment}</p>
-            <footer className="review__details">
-              <cite className="review__author">{comment?.user.name}</cite>
-              <time className="review__date" dateTime={comment?.date}>{comment?.date}</time>
-            </footer>
-          </blockquote>
-          <div className="review__rating">{comment?.rating}</div>
-        </div>
+        {comments.map((comment) => (
+          <div className="review" key={comment.id}>
+            <blockquote className="review__quote">
+              <p className="review__text">{comment?.comment}</p>
+              <footer className="review__details">
+                <cite className="review__author">{comment?.user.name}</cite>
+                <time className="review__date" dateTime={comment?.date}>{formatDate((comment?.date))}</time>
+              </footer>
+            </blockquote>
+            <div className="review__rating">{comment?.rating}</div>
+          </div>
+        ))}
       </div>
     </div>
   );
