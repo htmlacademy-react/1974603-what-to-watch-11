@@ -44,7 +44,7 @@ function AddReviewPage() : JSX.Element {
         </div>
       </div>
       <div className="add-review">
-        <AddComment />
+        <AddComment film = {film}/>
       </div>
     </section>
   );

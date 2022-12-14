@@ -1,10 +1,15 @@
 import React, {ChangeEvent, FormEvent, Fragment, useState} from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { MIN_COMMENT_LENGTH, ratings } from '../const';
 import { useAppDispatch } from '../hooks';
 import { addNewCommentAction } from '../store/api-actions';
+import { Film } from '../types/film-type';
 
-function AddComment () : JSX.Element {
+type Props = {
+  film: Film;
+}
+
+function AddComment ({film}: Props) : JSX.Element {
   const dispatch = useAppDispatch();
   const {id} = useParams();
   const [formDisabled, setFormDisabled] = useState(false);
@@ -61,12 +66,14 @@ function AddComment () : JSX.Element {
           disabled={formDisabled}
         />
         <div className="add-review__submit">
-          <button className="add-review__btn"
-            type="submit"
-            disabled={formData.reviewText.length < MIN_COMMENT_LENGTH || formData.rating === '' || formDisabled}
-          >
+          <Link to={`/films/${film.id}`}>
+            <button className="add-review__btn"
+              type="submit"
+              disabled={formData.reviewText.length < MIN_COMMENT_LENGTH || formData.rating === '' || formDisabled}
+            >
               Post
-          </button>
+            </button>
+          </Link>
         </div>
       </div>
     </form>
