@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import {Link, useParams} from 'react-router-dom';
+import {Link, useNavigate, useParams} from 'react-router-dom';
 import FilmsList from '../components/film-list';
 import Footer from '../components/footer';
 import Header from '../components/header/header';
@@ -7,17 +7,19 @@ import Loading from '../components/loading';
 import FilmTabs from '../components/tabs';
 import { AppRoute, AuthorizationStatus } from '../const';
 import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchCommentsListAction, fetchFilmAction } from '../store/api-actions';
-import { selectAuthorizationStatus, selectComments, selectFilm, selectFilms, selectFilmsLoading} from '../store/selector';
+import { fetchCommentsListAction, fetchFilmAction, setFilmStatusAction } from '../store/api-actions';
+import { selectAuthorizationStatus, selectComments, selectFavoriteFilms, selectFilm, selectFilms, selectFilmsLoading} from '../store/selector';
 
 function FilmPage(): JSX.Element {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const {id} = useParams();
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const films = useAppSelector(selectFilms);
   const film = useAppSelector(selectFilm);
   const comments = useAppSelector(selectComments);
   const isFilmsLoading = useAppSelector(selectFilmsLoading);
+  const favoriteFilms = useAppSelector(selectFavoriteFilms);
 
   useEffect(()=>{
     if (id && !isFilmsLoading) {
@@ -31,6 +33,14 @@ function FilmPage(): JSX.Element {
   }
 
   const similarFilms = films.filter((item) => item.genre === film.genre).slice(0,4);
+
+  const handleFavoriteClick = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(setFilmStatusAction({filmId: film.id, status: Number(!film.isFavorite)}));
+    } else {
+      navigate(AppRoute.SignIn);
+    }
+  };
 
   return (
     <>
@@ -64,12 +74,19 @@ function FilmPage(): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button className="btn btn--list film-card__button" type="button" onClick={handleFavoriteClick}>
+                  {!film.isFavorite && (
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                  )}
+                  {film.isFavorite && (
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                  )}
                   <span>My list</span>
-                  <span className="film-card__count">9</span>
+                  <span className="film-card__count">{favoriteFilms.length}</span>
                 </button>
                 {authorizationStatus === AuthorizationStatus.Auth ? <Link to={`/films/${id}/review`} className="btn film-card__button">Add review</Link> : <Link to={AppRoute.SignIn} className="btn film-card__button">Add review</Link>}
               </div>

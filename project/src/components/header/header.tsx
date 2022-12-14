@@ -2,21 +2,23 @@ import {Link} from 'react-router-dom';
 import { AppRoute, AuthorizationStatus } from '../../const';
 import {useAppDispatch, useAppSelector} from '../../hooks';
 import {logoutAction} from '../../store/api-actions';
-import {selectAuthorizationStatus, selectUserName} from '../../store/selector';
+import {selectAuthorizationStatus, selectUserData} from '../../store/selector';
 
 function Header(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const dispatch = useAppDispatch();
-  const userAvatar = useAppSelector(selectUserName);
+  const userData = useAppSelector(selectUserData);
 
   if(authorizationStatus === AuthorizationStatus.Auth) {
     return (
       <ul className="user-block">
         <li className="user-block__item">
           <div className="user-block__avatar">
-            <Link to="/mylist">
-              <img src={userAvatar} alt="User avatar" width="63" height="63" />
-            </Link>
+            {userData && (
+              <Link to="/mylist">
+                <img src={userData.avatarUrl} alt="User avatar" width="63" height="63" />
+              </Link>
+            )}
           </div>
         </li>
         <li className="user-block__item">
