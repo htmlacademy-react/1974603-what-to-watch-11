@@ -1,6 +1,6 @@
 import React, {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { MIN_COMMENT_LENGTH, ratings } from '../const';
+import { MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, ratings } from '../const';
 import { useAppDispatch } from '../hooks';
 import { addNewCommentAction } from '../store/api-actions';
 import { Film } from '../types/film-type';
@@ -50,7 +50,7 @@ function AddComment ({film}: Props) : JSX.Element {
         <div className="rating__stars">
           {ratings.map((number) => (
             <Fragment key={number}>
-              <input className="rating__input" id={`star-${number}`} type="radio" name="rating" value={number} onChange={handleRatingChange} />
+              <input className="rating__input" id={`star-${number}`} type="radio" name="rating" value={number} onChange={handleRatingChange} checked={Number(formData.rating) === number} />
               <label className="rating__label" htmlFor={`star-${number}`}>Rating ${number}</label>
             </Fragment>
           ))}
@@ -62,6 +62,7 @@ function AddComment ({film}: Props) : JSX.Element {
           value={formData.reviewText}
           id="review-text"
           placeholder="Review text"
+          maxLength={MAX_COMMENT_LENGTH}
           onChange={handleReviewChange}
           disabled={formDisabled}
         />

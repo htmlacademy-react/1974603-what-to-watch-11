@@ -1,13 +1,13 @@
 import FilmsListComponent from '../components/film-list';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../hooks';
-import {selectFilms} from '../store/selector';
+import {selectFavoriteFilms} from '../store/selector';
 import Loading from '../components/loading';
 import Footer from '../components/footer';
 import Header from '../components/header/header';
 
 function MyListPage(): JSX.Element {
-  const films = useAppSelector(selectFilms);
+  const films = useAppSelector(selectFavoriteFilms);
 
   if (!films) {
     return <Loading />;

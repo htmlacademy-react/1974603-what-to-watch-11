@@ -7,7 +7,6 @@ export const selectFilm = (state:State) => state.film;
 export const selectFavoriteFilms = (state:State) => state.favoriteFilms;
 export const selectFilmsLoading = (state:State) => state.loading;
 export const selectAuthorizationStatus = (state:State) => state.authorizationStatus;
-export const selectNewComment = (state:State) => state.comment;
 export const selectPromoFilm = (state:State) => state.promoFilm;
 export const selectComments = (state:State) => state.comments;
-export const selectUserName = (state:State) => state.userData?.avatarUrl;
+export const selectUserData = (state:State) => state.userData;

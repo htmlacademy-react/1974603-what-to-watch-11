@@ -1,11 +1,13 @@
 import {Link} from 'react-router-dom';
 import Loading from './loading';
 import Header from '../components/header/header';
-import { useAppSelector } from '../hooks';
+import { useAppDispatch, useAppSelector } from '../hooks';
 import { selectAuthorizationStatus, selectFavoriteFilms, selectPromoFilm } from '../store/selector';
-import { AuthorizationStatus } from '../const';
+import {AuthorizationStatus } from '../const';
+import { setFilmStatusAction } from '../store/api-actions';
 
 function HeaderFilm (): JSX.Element {
+  const dispatch = useAppDispatch();
   const promoFilm = useAppSelector(selectPromoFilm);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const favoriteFilms = useAppSelector(selectFavoriteFilms);
@@ -13,6 +15,12 @@ function HeaderFilm (): JSX.Element {
   if (!promoFilm) {
     return <Loading />;
   }
+
+  const handleFavoriteClick = () => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      dispatch(setFilmStatusAction({filmId: promoFilm.id, status: Number(!promoFilm.isFavorite)}));
+    }
+  };
 
   if(authorizationStatus === AuthorizationStatus.Auth) {
     return (
@@ -48,10 +56,17 @@ function HeaderFilm (): JSX.Element {
                   </svg>
                   <span>Play</span>
                 </Link>
-                <button className="btn btn--list film-card__button" type="button">
-                  <svg viewBox="0 0 19 20" width="19" height="20">
-                    <use xlinkHref="#add"></use>
-                  </svg>
+                <button className="btn btn--list film-card__button" type="button" onClick={handleFavoriteClick}>
+                  {!promoFilm.isFavorite && (
+                    <svg viewBox="0 0 19 20" width="19" height="20">
+                      <use xlinkHref="#add"></use>
+                    </svg>
+                  )}
+                  {promoFilm.isFavorite && (
+                    <svg viewBox="0 0 18 14" width="18" height="14">
+                      <use xlinkHref="#in-list"></use>
+                    </svg>
+                  )}
                   <span>My list</span>
                   <span className="film-card__count">{favoriteFilms.length}</span>
                 </button>

@@ -2,7 +2,7 @@ import {AxiosInstance} from 'axios';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 import {AppDispatch, State} from '../types/state.js';
 import {APIRoute, AppRoute, AuthorizationStatus, TIMEOUT_SHOW_ERROR } from '../const';
-import {setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, redirectToRoute, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction, setFavoriteFilmsAction} from './action';
+import {setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, redirectToRoute, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction, setFavoriteFilmsAction, setFilmStatus} from './action';
 import {AuthData} from '../types/auth-data.js';
 import {UserData} from '../types/user-data.js';
 import {dropToken, saveToken } from '../services/token';
@@ -73,15 +73,15 @@ export const fetchFavoriteFilmsAction = createAsyncThunk<void, undefined, {
   },
 );
 
-export const fetchFilmStatusAction = createAsyncThunk<void, boolean, {
+export const setFilmStatusAction = createAsyncThunk<void, {filmId: number; status: number}, {
   dispatch: AppDispatch;
   state: State;
   extra: AxiosInstance;
 }>(
-  'data/fetchFavoriteFilms',
-  async (status, {dispatch, extra: api}) => {
-    //const {data} = await api.post<Film>(`${APIRoute.FilmStatus}/${film.id}/${status}`);
-    //dispatch(setFavoriteFilmsAction(data));
+  'data/setFilmStatusAction',
+  async ({filmId, status}, {dispatch, extra: api}) => {
+    const {data} = await api.post<Film>(`${APIRoute.FilmStatus}/${filmId}/${status}`);
+    dispatch(setFilmStatus(data));
   },
 );
 

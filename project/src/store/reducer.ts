@@ -3,7 +3,7 @@ import { AuthorizationStatus } from '../const';
 import { Comment } from '../types/comment-type';
 import { Film } from '../types/film-type';
 import { UserData } from '../types/user-data';
-import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction, setFavoriteFilmsAction, setFilmStatusAction} from './action';
+import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction, setFavoriteFilmsAction, setFilmStatus} from './action';
 
 type InitialState = {
   allFilms: Film[];
@@ -68,8 +68,18 @@ const reducer = createReducer(initialState, (builder) => {
     .addCase(setFavoriteFilmsAction, (state, action) => {
       state.favoriteFilms = action.payload;
     })
-    .addCase(setFilmStatusAction, (state, action) => {
-      state.filmStatus = action.payload;
+    .addCase(setFilmStatus, (state, action) => {
+      if (state.film && state.film.id === action.payload.id){
+        state.film = action.payload;
+      }
+      if (state.promoFilm && state.promoFilm.id === action.payload.id) {
+        state.promoFilm = action.payload;
+      }
+      if (action.payload.isFavorite) {
+        state.favoriteFilms.push(action.payload);
+      } else {
+        state.favoriteFilms = state.favoriteFilms.filter((films) => films.id !== action.payload.id);
+      }
     })
     .addCase(setNewCommentAction, (state, action) => {
       state.comment = action.payload;
