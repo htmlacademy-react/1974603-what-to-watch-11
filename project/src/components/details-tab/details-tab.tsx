@@ -1,5 +1,5 @@
-import { formatMinutes } from '../const';
-import {Film} from '../types/film-type';
+import { formatMinutes } from '../../const';
+import { Film } from '../../types/film-type';
 
 type Props={
   film: Film;

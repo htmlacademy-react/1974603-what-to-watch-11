@@ -37,5 +37,7 @@ export const MIN_COMMENT_LENGTH = 50;
 export const MAX_COMMENT_LENGTH = 400;
 export const SECONDS_IN_HOUR = 3600;
 export const ratings = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+export const EMAIL_REGULAR_EXPR = /^(([^<>()[\].,;:\s@"]+(\.[^<>()[\].,;:\s@"]+)*)|(".+"))@(([^<>()[\].,;:\s@"]+\.)+[^<>()[\].,;:\s@"]{2,})$/i;
+export const PASSWORD_REGULAR_EXPR = /[a-z]\d|/i;
 export const formatMinutes = (minutes:number) => dayjs.duration(minutes, 'minutes').format('H[h] mm[m]');
 export const formatDate = (date: string) => dayjs(date).format('MMMM D, YYYY');

@@ -1,10 +1,10 @@
 import {Link} from 'react-router-dom';
-import Loading from './loading';
-import Header from '../components/header/header';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectAuthorizationStatus, selectFavoriteFilms, selectPromoFilm } from '../store/selector';
-import {AuthorizationStatus } from '../const';
-import { setFilmStatusAction } from '../store/api-actions';
+import { AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setFilmStatusAction } from '../../store/api-actions';
+import { selectAuthorizationStatus, selectFavoriteFilms, selectPromoFilm } from '../../store/selector';
+import Loading from '../loading/loading';
+import Header from './header';
 
 function HeaderFilm (): JSX.Element {
   const dispatch = useAppDispatch();
@@ -37,7 +37,7 @@ function HeaderFilm (): JSX.Element {
               <span className="logo__letter logo__letter--3">W</span>
             </Link>
           </div>
-          <Header/>
+          <Header />
         </header>
         <div className="film-card__wrap">
           <div className="film-card__info">

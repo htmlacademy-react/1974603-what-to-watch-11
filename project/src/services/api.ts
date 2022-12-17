@@ -35,10 +35,10 @@ export const createAPI = (): AxiosInstance => {
     (error: AxiosError<{error: string}>) => {
       if (error.response && shouldDisplayError(error.response)) {
         if (error.response.status === 400) {
-          processErrorHandle('Please enter a valid email address');
+          processErrorHandle('Error');
         }
         else {
-          processErrorHandle('We can’t recognize this email and password combination. Please try again.');
+          processErrorHandle('Error');
         }
       }
 

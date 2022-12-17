@@ -1,6 +1,7 @@
-import {FormEvent, useRef} from 'react';
+import {FormEvent, useRef, useState} from 'react';
 import {Link} from 'react-router-dom';
-import Footer from '../components/footer';
+import Footer from '../components/footer/footer';
+import { EMAIL_REGULAR_EXPR, PASSWORD_REGULAR_EXPR } from '../const';
 import {useAppDispatch} from '../hooks';
 import {loginAction} from '../store/api-actions';
 import {AuthData} from '../types/auth-data';
@@ -9,6 +10,7 @@ function SignInPage(): JSX.Element {
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+  const [, setIsValid] = useState(false);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -18,10 +20,19 @@ function SignInPage(): JSX.Element {
     evt.preventDefault();
 
     if (loginRef.current !== null && passwordRef.current !== null) {
-      onSubmit({
-        login: loginRef.current.value,
-        password: passwordRef.current.value,
-      });
+      const emailValidCondition = EMAIL_REGULAR_EXPR.test(String(loginRef.current.value));
+      const passwordValidCondition = PASSWORD_REGULAR_EXPR.test(String(passwordRef.current.value));
+
+      if (emailValidCondition && passwordValidCondition) {
+        setIsValid(true);
+
+        onSubmit({
+          login: loginRef.current.value,
+          password: passwordRef.current.value,
+        });
+      } else {
+        setIsValid(false);
+      }
     }
   };
 

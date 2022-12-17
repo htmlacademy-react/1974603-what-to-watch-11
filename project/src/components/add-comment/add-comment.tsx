@@ -1,9 +1,9 @@
 import React, {ChangeEvent, FormEvent, Fragment, useState} from 'react';
 import { Link, useParams } from 'react-router-dom';
-import { MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, ratings } from '../const';
-import { useAppDispatch } from '../hooks';
-import { addNewCommentAction } from '../store/api-actions';
-import { Film } from '../types/film-type';
+import { MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, ratings } from '../../const';
+import { useAppDispatch } from '../../hooks';
+import { addNewCommentAction } from '../../store/api-actions';
+import { Film } from '../../types/film-type';
 
 type Props = {
   film: Film;

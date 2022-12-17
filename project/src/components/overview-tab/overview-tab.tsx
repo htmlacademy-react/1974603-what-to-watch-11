@@ -1,4 +1,4 @@
-import {Film} from '../types/film-type';
+import { Film } from '../../types/film-type';
 
 type Props={
   film: Film;
