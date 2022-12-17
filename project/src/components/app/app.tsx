@@ -1,19 +1,19 @@
-import MainPage from '../../pages/main-page';
 import {Route, Routes} from 'react-router-dom';
-import NotFoundPage from '../../pages/not-found-page';
 import {AppRoute, AuthorizationStatus} from '../../const';
-import SignInPage from '../../pages/sign-in-page';
-import MyListPage from '../../pages/my-list-page';
-import FilmPage from '../../pages/film-page';
-import AddReviewPage from '../../pages/add-review-page';
-import PlayerPage from '../../pages/player-page';
-import PrivateRoute from '../../components/private-route';
 import { useAppSelector } from '../../hooks';
 import {selectAuthorizationStatus, selectFilmsLoading} from '../../store/selector';
 import HistoryRouter from '../history-route/history-route';
 import browserHistory from '../../browser-history';
 import { HelmetProvider } from 'react-helmet-async';
-import Loading from '../loading';
+import Loading from '../loading/loading';
+import PrivateRoute from '../private-route/private-route';
+import MainPage from '../../pages/main-page/main-page';
+import SignInPage from '../../pages/sign-in-page/sign-in-page';
+import MyListPage from '../../pages/my-list-page/my-list-page';
+import FilmPage from '../../pages/film-page/film-page';
+import AddReviewPage from '../../pages/add-review-page/add-review-page';
+import PlayerPage from '../../pages/player-page/player-page';
+import NotFoundPage from '../../pages/not-found-page/not-found-page';
 
 function App(): JSX.Element {
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);

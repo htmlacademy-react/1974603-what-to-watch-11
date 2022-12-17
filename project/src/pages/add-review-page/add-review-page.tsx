@@ -1,9 +1,9 @@
 import {Link} from 'react-router-dom';
-import { useAppSelector } from '../hooks';
-import { selectFilm} from '../store/selector';
-import Loading from '../components/loading';
-import AddComment from '../components/add-comment';
-import Header from '../components/header/header';
+import AddComment from '../../components/add-comment/add-comment';
+import Header from '../../components/header/header';
+import Loading from '../../components/loading/loading';
+import { useAppSelector } from '../../hooks';
+import { selectFilm } from '../../store/selector';
 
 function AddReviewPage() : JSX.Element {
   const film = useAppSelector(selectFilm);

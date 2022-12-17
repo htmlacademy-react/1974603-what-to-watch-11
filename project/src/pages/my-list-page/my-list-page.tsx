@@ -1,10 +1,10 @@
-import FilmsListComponent from '../components/film-list';
 import { Link } from 'react-router-dom';
-import { useAppSelector } from '../hooks';
-import {selectFavoriteFilms} from '../store/selector';
-import Loading from '../components/loading';
-import Footer from '../components/footer';
-import Header from '../components/header/header';
+import FilmsList from '../../components/film-list/film-list';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import Loading from '../../components/loading/loading';
+import {useAppSelector} from '../../hooks';
+import {selectFavoriteFilms} from '../../store/selector';
 
 function MyListPage(): JSX.Element {
   const films = useAppSelector(selectFavoriteFilms);
@@ -28,9 +28,9 @@ function MyListPage(): JSX.Element {
       </header>
       <section className="catalog">
         <h2 className="catalog__title visually-hidden">Catalog</h2>
-        <FilmsListComponent films = {films}/>
+        <FilmsList films = {films}/>
       </section>
-      <Footer/>
+      <Footer />
     </div>
   );
 }

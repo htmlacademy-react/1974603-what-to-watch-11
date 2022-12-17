@@ -1,6 +1,6 @@
-import { formatDate } from '../const';
-import { useAppSelector } from '../hooks';
-import { selectComments} from '../store/selector';
+import { formatDate } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { selectComments } from '../../store/selector';
 
 function ReviewsTab () : JSX.Element {
   const comments = useAppSelector(selectComments);

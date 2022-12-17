@@ -1,8 +1,8 @@
 import {useState, useRef, useEffect} from 'react';
 import {Link} from 'react-router-dom';
-import { TYME_DELAY } from '../const';
-import {Film} from '../types/film-type';
-import VideoPlayer from './video-player';
+import { TYME_DELAY } from '../../const';
+import { Film } from '../../types/film-type';
+import VideoPlayer from '../video-player/video-player';
 
 type Props = {
 film: Film;

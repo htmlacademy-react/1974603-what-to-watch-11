@@ -1,10 +1,10 @@
 import {useState} from 'react';
 import {Link} from 'react-router-dom';
-import {Comment} from '../types/comment-type';
-import {Film} from '../types/film-type';
-import DetailsTab from './details-tab';
-import OverviewTab from './overview-tab';
-import ReviewsTab from './reviews-tab';
+import { Comment } from '../../types/comment-type';
+import { Film } from '../../types/film-type';
+import DetailsTab from '../details-tab/details-tab';
+import OverviewTab from '../overview-tab/overview-tab';
+import ReviewsTab from '../reviews-tab/reviews-tab';
 
 type Props={
   film: Film;

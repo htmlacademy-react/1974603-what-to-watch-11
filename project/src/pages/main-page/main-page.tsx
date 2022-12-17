@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import FilmsListComponent from '../components/film-list';
-import GenreList from '../components/genres-list';
-import {ONE_PART_OF_THE_FILMS } from '../const';
-import ShowMoreButton from '../components/show-more-button';
-import {useAppSelector } from '../hooks';
-import {selectFilms} from '../store/selector';
-import Footer from '../components/footer';
-import HeaderFilm from '../components/header-film';
+import FilmsList from '../../components/film-list/film-list';
+import Footer from '../../components/footer/footer';
+import GenreList from '../../components/genres-list/genres-list';
+import PromoFilm from '../../components/promo-film/promo-film';
+import ShowMoreButton from '../../components/show-more-button/show-more-button';
+import { ONE_PART_OF_THE_FILMS } from '../../const';
+import { useAppSelector } from '../../hooks';
+import { selectFilms } from '../../store/selector';
 
 function MainPage(): JSX.Element {
   const [filmCount, setFilmCount] = useState(ONE_PART_OF_THE_FILMS);
@@ -23,12 +23,12 @@ function MainPage(): JSX.Element {
 
   return (
     <>
-      <HeaderFilm />
+      <PromoFilm />
       <div className="page-content">
         <section className="catalog">
           <h2 className="catalog__title visually-hidden">Catalog</h2>
           <GenreList />
-          <FilmsListComponent films={films} />
+          <FilmsList films={films} />
           {storeFilms.length > filmCount ? <ShowMoreButton onButtonClick={handleShowMoreButton} /> : ''}
         </section>
         <Footer />

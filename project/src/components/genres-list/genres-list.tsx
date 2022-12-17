@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { changeGenreAction } from '../store/action';
-import {selectGenre, selectGenres} from '../store/selector';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { changeGenreAction } from '../../store/action';
+import { selectGenre, selectGenres } from '../../store/selector';
 
 function GenreList () : JSX.Element {
   const dispatch = useAppDispatch();

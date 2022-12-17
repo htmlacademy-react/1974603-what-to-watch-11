@@ -1,12 +1,12 @@
 import {Link} from 'react-router-dom';
-import Loading from './loading';
-import Header from '../components/header/header';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { selectAuthorizationStatus, selectFavoriteFilms, selectPromoFilm } from '../store/selector';
-import {AuthorizationStatus } from '../const';
-import { setFilmStatusAction } from '../store/api-actions';
+import { AuthorizationStatus } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { setFilmStatusAction } from '../../store/api-actions';
+import { selectAuthorizationStatus, selectFavoriteFilms, selectPromoFilm } from '../../store/selector';
+import Header from '../header/header';
+import Loading from '../loading/loading';
 
-function HeaderFilm (): JSX.Element {
+function PromoFilm (): JSX.Element {
   const dispatch = useAppDispatch();
   const promoFilm = useAppSelector(selectPromoFilm);
   const authorizationStatus = useAppSelector(selectAuthorizationStatus);
@@ -37,7 +37,7 @@ function HeaderFilm (): JSX.Element {
               <span className="logo__letter logo__letter--3">W</span>
             </Link>
           </div>
-          <Header/>
+          <Header />
         </header>
         <div className="film-card__wrap">
           <div className="film-card__info">
@@ -92,9 +92,9 @@ function HeaderFilm (): JSX.Element {
             <span className="logo__letter logo__letter--3">W</span>
           </Link>
         </div>
-        <Header/>
+        <Header />
       </header>
     </section>
   );
 }
-export default HeaderFilm;
+export default PromoFilm;

@@ -1,14 +1,15 @@
 import { useEffect } from 'react';
 import {Link, useNavigate, useParams} from 'react-router-dom';
-import FilmsList from '../components/film-list';
-import Footer from '../components/footer';
-import Header from '../components/header/header';
-import Loading from '../components/loading';
-import FilmTabs from '../components/tabs';
-import { AppRoute, AuthorizationStatus } from '../const';
-import { useAppDispatch, useAppSelector } from '../hooks';
-import { fetchCommentsListAction, fetchFilmAction, setFilmStatusAction } from '../store/api-actions';
-import { selectAuthorizationStatus, selectComments, selectFavoriteFilms, selectFilm, selectFilms, selectFilmsLoading} from '../store/selector';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { selectAuthorizationStatus, selectComments, selectFavoriteFilms, selectFilm, selectFilms, selectFilmsLoading } from '../../store/selector';
+import { fetchCommentsListAction, fetchFilmAction, setFilmStatusAction } from '../../store/api-actions';
+import { AppRoute, AuthorizationStatus } from '../../const';
+import Loading from '../../components/loading/loading';
+import FilmTabs from '../../components/tabs/tabs';
+import FilmsList from '../../components/film-list/film-list';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+
 
 function FilmPage(): JSX.Element {
   const dispatch = useAppDispatch();

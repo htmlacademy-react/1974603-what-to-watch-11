@@ -1,9 +1,7 @@
 import {createReducer} from '@reduxjs/toolkit';
-import { AuthorizationStatus } from '../const';
-import { Comment } from '../types/comment-type';
-import { Film } from '../types/film-type';
-import { UserData } from '../types/user-data';
-import {changeGenreAction, setFilmsAction, requireAuthorization, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setUserDataAction, setFavoriteFilmsAction, setFilmStatus} from './action';
+import { Comment } from '../../types/comment-type';
+import { Film } from '../../types/film-type';
+import {changeGenreAction, setFilmsAction, setFilmsLoadingAction, setFilmAction, setError, setNewCommentAction, setCommentsAction, setPromoFilmAction, setFavoriteFilmsAction, setFilmStatus} from '../action';
 
 type InitialState = {
   allFilms: Film[];
@@ -16,10 +14,8 @@ type InitialState = {
   error: string | null;
   favoriteFilms: Film[];
   filmStatus: Film | undefined;
-  userData: UserData | undefined;
   comments: Comment[];
   comment: Comment | undefined;
-  authorizationStatus: AuthorizationStatus;
 }
 
 const initialState: InitialState = {
@@ -31,15 +27,13 @@ const initialState: InitialState = {
   genre: 'All genres',
   genres: [],
   loading: false,
-  userData: undefined,
   error: null,
   favoriteFilms: [],
   comments: [],
   comment: undefined,
-  authorizationStatus: AuthorizationStatus.Unknown
 };
 
-const reducer = createReducer(initialState, (builder) => {
+const filmReducer = createReducer(initialState, (builder) => {
   builder
     .addCase(setFilmsLoadingAction, (state, action) => {
       state.loading = action.payload;
@@ -55,9 +49,6 @@ const reducer = createReducer(initialState, (builder) => {
       state.allFilms = action.payload;
       state.films = action.payload;
       state.genres = Array.from(new Set((action.payload.map((item) => item.genre))));
-    })
-    .addCase(setUserDataAction, (state, action) => {
-      state.userData = action.payload;
     })
     .addCase(setFilmAction, (state, action) => {
       state.film = action.payload;
@@ -86,9 +77,6 @@ const reducer = createReducer(initialState, (builder) => {
     })
     .addCase(setCommentsAction, (state, action) => {
       state.comments = action.payload;
-    })
-    .addCase(requireAuthorization, (state, action) => {
-      state.authorizationStatus = action.payload;
     });
 });
-export {reducer};
+export {filmReducer};
