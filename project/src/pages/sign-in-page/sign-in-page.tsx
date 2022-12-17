@@ -1,16 +1,20 @@
-import {FormEvent, useRef, useState} from 'react';
-import {Link} from 'react-router-dom';
-import Footer from '../components/footer/footer';
-import { EMAIL_REGULAR_EXPR, PASSWORD_REGULAR_EXPR } from '../const';
-import {useAppDispatch} from '../hooks';
-import {loginAction} from '../store/api-actions';
-import {AuthData} from '../types/auth-data';
+import {FormEvent, useEffect, useRef, useState} from 'react';
+import {Link, useNavigate} from 'react-router-dom';
+import Footer from '../../components/footer/footer';
+import { AppRoute, AuthorizationStatus, EMAIL_REGULAR_EXPR, PASSWORD_REGULAR_EXPR } from '../../const';
+import { useAppDispatch, useAppSelector } from '../../hooks';
+import { loginAction } from '../../store/api-actions';
+import { selectAuthorizationStatus } from '../../store/selector';
+import { AuthData } from '../../types/auth-data';
 
 function SignInPage(): JSX.Element {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const authorizationStatus = useAppSelector(selectAuthorizationStatus);
   const loginRef = useRef<HTMLInputElement | null>(null);
   const passwordRef = useRef<HTMLInputElement | null>(null);
-  const dispatch = useAppDispatch();
-  const [, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(false);
+  const [formDisabled, setFormDisabled] = useState(false);
 
   const onSubmit = (authData: AuthData) => {
     dispatch(loginAction(authData));
@@ -18,6 +22,7 @@ function SignInPage(): JSX.Element {
 
   const handleSubmit = (evt: FormEvent<HTMLFormElement>) => {
     evt.preventDefault();
+    setFormDisabled(true);
 
     if (loginRef.current !== null && passwordRef.current !== null) {
       const emailValidCondition = EMAIL_REGULAR_EXPR.test(String(loginRef.current.value));
@@ -34,7 +39,14 @@ function SignInPage(): JSX.Element {
         setIsValid(false);
       }
     }
+    setFormDisabled(false);
   };
+
+  useEffect(() => {
+    if (authorizationStatus === AuthorizationStatus.Auth) {
+      navigate(AppRoute.Main);
+    }
+  }, [authorizationStatus, navigate]);
 
   return (
     <div className="user-page">
@@ -50,6 +62,10 @@ function SignInPage(): JSX.Element {
       </header>
       <div className="sign-in user-page__content">
         <form action="" className="sign-in__form" onSubmit={handleSubmit}>
+          {isValid ? '' :
+            <div className="sign-in__message">
+              <p>We can’t recognize this email and password combination. Please try again.</p>
+            </div>}
           <div className="sign-in__fields">
             <div className="sign-in__field">
               <input
@@ -59,6 +75,7 @@ function SignInPage(): JSX.Element {
                 placeholder="Email address"
                 name="user-email"
                 id="user-email"
+                disabled={formDisabled}
                 required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-email">Email address</label>
@@ -71,6 +88,7 @@ function SignInPage(): JSX.Element {
                 placeholder="Password"
                 name="user-password"
                 id="user-password"
+                disabled={formDisabled}
                 required
               />
               <label className="sign-in__label visually-hidden" htmlFor="user-password">Password</label>

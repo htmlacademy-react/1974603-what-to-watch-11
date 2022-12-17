@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
-import FilmsList from '../components/film-list/film-list';
-import Footer from '../components/footer/footer';
-import Header from '../components/header-film/header';
-import Loading from '../components/loading/loading';
-import { useAppSelector } from '../hooks';
-import {selectFavoriteFilms} from '../store/selector';
+import FilmsList from '../../components/film-list/film-list';
+import Footer from '../../components/footer/footer';
+import Header from '../../components/header/header';
+import Loading from '../../components/loading/loading';
+import {useAppSelector} from '../../hooks';
+import {selectFavoriteFilms} from '../../store/selector';
 
 function MyListPage(): JSX.Element {
   const films = useAppSelector(selectFavoriteFilms);

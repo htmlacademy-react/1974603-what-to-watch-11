@@ -1,5 +1,5 @@
 import React, {ChangeEvent, FormEvent, Fragment, useState} from 'react';
-import { Link, useParams } from 'react-router-dom';
+import {useParams } from 'react-router-dom';
 import { MAX_COMMENT_LENGTH, MIN_COMMENT_LENGTH, ratings } from '../../const';
 import { useAppDispatch } from '../../hooks';
 import { addNewCommentAction } from '../../store/api-actions';
@@ -39,9 +39,6 @@ function AddComment ({film}: Props) : JSX.Element {
       comment: formData.reviewText,
       rating: Number(formData.rating),
     }));
-
-    setFormDisabled(false);
-    setFormData({...formData, rating: '', reviewText:''});
   };
 
   return (
@@ -67,14 +64,12 @@ function AddComment ({film}: Props) : JSX.Element {
           disabled={formDisabled}
         />
         <div className="add-review__submit">
-          <Link to={`/films/${film.id}`}>
-            <button className="add-review__btn"
-              type="submit"
-              disabled={formData.reviewText.length < MIN_COMMENT_LENGTH || formData.rating === '' || formDisabled}
-            >
+          <button className="add-review__btn"
+            type="submit"
+            disabled={formData.reviewText.length < MIN_COMMENT_LENGTH || formData.rating === '' || formDisabled}
+          >
               Post
-            </button>
-          </Link>
+          </button>
         </div>
       </div>
     </form>
